@@ -1,4 +1,4 @@
 public class shoreClass {
 
-   String o = "not it is nt";
+   String o = "not it nt";
 }
