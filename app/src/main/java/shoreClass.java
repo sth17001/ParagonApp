@@ -1,4 +1,4 @@
 public class shoreClass {
 
-    // this is  a change
+   String o = "not it is not";
 }
