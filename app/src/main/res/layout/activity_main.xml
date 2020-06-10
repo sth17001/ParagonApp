@@ -6,17 +6,17 @@
     android:layout_height="match_parent"
     android:background="@drawable/darkbacon"
     tools:context=".MainActivity">
+
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/whitetransparagon"
+        android:layout_width="333dp"
+        android:layout_height="241dp"
+        android:layout_centerInParent="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_centerInParent="true"
-        />
+        android:src="@drawable/whitetransparagon" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginBottom="150dp"
@@ -28,23 +28,23 @@
             android:id="@+id/guestbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
             android:backgroundTint="#780909"
             android:text="Continue as Guest"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textSize="24dp"/>
+            android:textSize="14dp"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
             android:backgroundTint="#976519"
             android:text="Login or sign up"
             android:textColor="#FFFFFF"
-            android:textSize="24dp" />
+            android:textSize="14dp" />
 
 
         ></LinearLayout>

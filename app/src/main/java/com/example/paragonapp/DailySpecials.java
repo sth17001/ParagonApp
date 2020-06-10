@@ -4,14 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class OrderOnline extends AppCompatActivity {
+public class DailySpecials extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_online);
-
-
-
+        setContentView(R.layout.activity_daily_specials);
     }
 }
