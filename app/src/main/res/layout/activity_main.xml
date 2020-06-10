@@ -24,13 +24,13 @@
         android:orientation="vertical">
 
 
-
         <Button
+            android:id="@+id/guestbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:backgroundTint="#8F1C1C"
+            android:backgroundTint="#780909"
             android:text="Continue as Guest"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
