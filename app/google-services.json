@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "422747867585",
+    "firebase_url": "https://paragonapp-6a4cb.firebaseio.com",
+    "project_id": "paragonapp-6a4cb",
+    "storage_bucket": "paragonapp-6a4cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422747867585:android:8a9aabdedb8e92293ec740",
+        "android_client_info": {
+          "package_name": "com.example.paragonapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422747867585-eoj1b433oj80jb280a7hbtn8pjqmmf1c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.paragonapp",
+            "certificate_hash": "d77fb2a2ff2f7067fcbcdf71cfac59cd0b16b27a"
+          }
+        },
+        {
+          "client_id": "422747867585-b1k7e676v5q2rk8m19tn14orne5bu321.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7gNaCbjznaZVRloU3hP81jYRRAnptDBs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422747867585-b1k7e676v5q2rk8m19tn14orne5bu321.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
