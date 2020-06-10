@@ -7,10 +7,21 @@
     android:background="@android:color/white"
     tools:context=".OrderOnline">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/checkout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+
+            ></LinearLayout>
         <LinearLayout
             android:id="@+id/menu"
             android:layout_width="match_parent"
@@ -62,12 +73,12 @@
             ></LinearLayout>
 
         <LinearLayout
-        android:id="@+id/checkout"
+        android:id="@+id/cart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <ListView
             android:id="@+id/cartItems"
@@ -102,6 +113,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/menuBTN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -111,8 +123,8 @@
             android:textStyle="bold" />
 
         <Button
+            android:id="@+id/cartBTN"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#FFFFFF"
@@ -121,8 +133,8 @@
             android:textStyle="bold" />
 
         <Button
+            android:id="@+id/checkoutBTN"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#FFFFFF"
