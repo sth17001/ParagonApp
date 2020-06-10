@@ -37,7 +37,7 @@
             android:textSize="14dp"/>
 
         <Button
-            android:id="@+id/login"
+            android:id="@+id/loginbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
