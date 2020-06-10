@@ -42,7 +42,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:backgroundTint="#976519"
-            android:text="Login"
+            android:text="Login or sign up"
             android:textColor="#FFFFFF"
             android:textSize="24dp" />
 
