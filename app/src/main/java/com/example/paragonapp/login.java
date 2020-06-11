@@ -12,11 +12,16 @@ import com.google.firebase.database.ValueEventListener;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import static android.widget.Toast.LENGTH_LONG;
 
 public class login extends AppCompatActivity {
     EditText getUsername, getPassword;
     String emailOrUsername, password;
     DatabaseReference table_user;
+    boolean loggedin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,14 +39,22 @@ public class login extends AppCompatActivity {
         table_user.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                if (dataSnapshot.child(getUsername.getText().toString()).exists()) {
+                    User user = dataSnapshot.child(getUsername.getText().toString()).getValue(User.class);
+                    if (user.getPassword().equals(password)) {
+                        loggedin = true;
+                        Toast.makeText(login.this, "Logged in", LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(login.this, "Login failed", LENGTH_LONG).show();
+                    }
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        })
+        });
 
     }
 }
