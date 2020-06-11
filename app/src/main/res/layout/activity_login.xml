@@ -7,7 +7,7 @@
     tools:context=".login">
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/usernameEdit"
         android:layout_width="324dp"
         android:layout_height="49dp"
         android:layout_marginTop="268dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/passwordEdit"
         android:layout_width="324dp"
         android:layout_height="49dp"
         android:layout_marginTop="21dp"
@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText1" />
+        app:layout_constraintTop_toBottomOf="@+id/usernameEdit" />
 
     <Button
         android:id="@+id/button1"
@@ -42,7 +42,7 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordEdit" />
 
     <Button
         android:id="@+id/button2"

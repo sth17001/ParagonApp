@@ -32,8 +32,8 @@ public class login extends AppCompatActivity {
     }
 
     public void logIn(View view) {
-        getUsername = (EditText) findViewById(R.id.editText1);
-        getPassword = (EditText) findViewById(R.id.editText2);
+        getUsername = (EditText) findViewById(R.id.usernameEdit);
+        getPassword = (EditText) findViewById(R.id.passwordEdit);
         emailOrUsername = getUsername.getText().toString();
         password = getPassword.getText().toString();
         table_user.addValueEventListener(new ValueEventListener() {
