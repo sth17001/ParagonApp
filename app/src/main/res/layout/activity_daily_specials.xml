@@ -39,13 +39,15 @@
         android:id="@+id/dailyPic"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
+        android:visibility="gone"
         android:src="@drawable/paragonweekly"/>
+
     <ImageView
         android:id="@+id/weeklyPic"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"/>
+        android:visibility="visible"
+        android:src="@drawable/daily"/>
 
 
 </RelativeLayout>
