@@ -1,12 +1,12 @@
 package com.example.paragonapp;
 
 public class User {
-    String email;
+    //String email;
     String username;
     String password;
 
-    public User(String email, String username, String password) {
-        this.email = email;
+    public User(String username, String password) {
+        //this.email = email;
         this.username = username;
         this.password = password;
     }
@@ -14,13 +14,13 @@ public class User {
     public User() {
     }
 
-    public String getEmail() {
+    /*public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
+    }*/
 
     public String getUsername() {
         return username;

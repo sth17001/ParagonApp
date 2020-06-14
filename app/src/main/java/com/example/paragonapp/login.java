@@ -18,7 +18,7 @@ import static android.widget.Toast.LENGTH_LONG;
 
 public class login extends AppCompatActivity {
     EditText getUsername, getPassword;
-    String emailOrUsername, password;
+    String username, password;
     DatabaseReference table_user;
     boolean loggedin;
 
@@ -34,9 +34,15 @@ public class login extends AppCompatActivity {
     public void logIn(View view) {
         getUsername = (EditText) findViewById(R.id.usernameEdit);
         getPassword = (EditText) findViewById(R.id.passwordEdit);
-        emailOrUsername = getUsername.getText().toString();
+
+        User user = new User(getUsername.getText().toString(), getPassword.getText().toString());
+        System.out.println(user.getUsername() + ", " + user.getPassword());
+
+        /*username = getUsername.getText().toString();
         password = getPassword.getText().toString();
+        Toast.makeText(login.this, "Password: " + password, LENGTH_LONG).show();
         table_user.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child(getUsername.getText().toString()).exists()) {
@@ -52,9 +58,9 @@ public class login extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                System.out.println("Failed to read value.");
             }
         });
-
+        */
     }
 }
