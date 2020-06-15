@@ -41,6 +41,12 @@ public class login extends AppCompatActivity {
 
         System.out.println(userArrayList.get(3).getUsername() + ", " + userArrayList.get(3).getPassword());
 
+        if (canLogin(currentUser)) {
+            Toast.makeText(login.this, "Logged in succesfully!", LENGTH_LONG).show();
+        } else {
+            Toast.makeText(login.this, "Login FAILED!", LENGTH_LONG).show();
+        }
+
         /*userRef.child("1").child("password").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
