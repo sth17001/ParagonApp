@@ -9,6 +9,7 @@ import com.google.firebase.database.ValueEventListener;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -91,5 +92,21 @@ public class login extends AppCompatActivity {
             Toast.makeText(login.this, "Incorrect username/password.", LENGTH_LONG).show();
         }
         return canLogin;
+    }
+
+    public void saveUser(User currentUser) {
+        String preferences = null;
+        SharedPreferences sharedpreferences = getSharedPreferences(preferences, 0);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString("username", currentUser.getUsername());
+        editor.putString("password", currentUser.getPassword());
+        editor.commit();
+    }
+
+    public void loadUser(User currentUser) {
+        String preferences = null;
+        SharedPreferences sharedpreferences = getSharedPreferences(preferences, 0);
+        currentUser.setUsername(sharedpreferences.getString("username", "null"));
+        currentUser.setPassword(sharedpreferences.getString("password", "null"));
     }
 }
