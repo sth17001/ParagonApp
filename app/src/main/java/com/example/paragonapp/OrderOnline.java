@@ -61,7 +61,7 @@ public class OrderOnline extends AppCompatActivity {
 
         //Load GrilledItems
         grilledDatabase = FirebaseDatabase.getInstance().getReference().child("GrilledItems");
-        grilledDatabase.addValueEventListener(new ValueEventListener(){
+        grilledDatabase.addListenerForSingleValueEvent(new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot data: dataSnapshot.getChildren()){
