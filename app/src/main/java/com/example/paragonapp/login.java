@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ public class login extends AppCompatActivity {
     EditText getUsername, getPassword;
     DatabaseReference userRef;
     ArrayList<User> userArrayList = new ArrayList<User>();
+    Boolean rememberChecked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,8 @@ public class login extends AppCompatActivity {
     }
 
     public void logIn(View view) throws InterruptedException {
+        rememberChecked = ((CheckBox) findViewById(R.id.rememberCheck)).isChecked();
+
         getUsername = (EditText) findViewById(R.id.usernameEdit);
         getPassword = (EditText) findViewById(R.id.passwordEdit);
 
@@ -44,6 +48,10 @@ public class login extends AppCompatActivity {
         System.out.println(userArrayList.get(3).getUsername() + ", " + userArrayList.get(3).getPassword());
 
         if (canLogin(currentUser)) {
+            if (rememberChecked) {
+                saveUser(currentUser);
+                System.out.println("user saved.");
+            }
             Intent create = new Intent(login.this, loggedIn.class);
             startActivity(create);
             //Toast.makeText(login.this, "Logged in succesfully!", LENGTH_LONG).show();
