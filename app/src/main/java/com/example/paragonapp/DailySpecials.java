@@ -8,9 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.github.chrisbanes.photoview.PhotoView;
+
 public class DailySpecials extends AppCompatActivity {
 Button dailyButton,weeklyButton;
-ImageView daily,paragonweekly;
+PhotoView daily,paragonweekly;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +24,8 @@ ImageView daily,paragonweekly;
         weeklyButton = (Button)findViewById(R.id.weeklyButton);
 
         // Images for daily and weekly specials
-        daily = (ImageView)findViewById(R.id.dailyPic);
-        paragonweekly = (ImageView)findViewById(R.id.weeklyPic);
+        daily = (PhotoView) findViewById(R.id.dailyPic);
+        paragonweekly = (PhotoView) findViewById(R.id.weeklyPic);
 
         dailyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

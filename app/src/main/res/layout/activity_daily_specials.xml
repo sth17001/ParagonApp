@@ -9,45 +9,59 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/dailyButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#00FFFFFF"
-            android:gravity="center_horizontal"
-            android:text="Specials of the Day"
-            android:textAlignment="center"
-            android:textColor="#FFFF" />
 
-        <Button
-            android:id="@+id/weeklyButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="#00FFFFFF"
-            android:gravity="center_horizontal"
-            android:text="Specials of the Week"
-            android:textAlignment="center"
-            android:textColor="#FFFF" />
+
+
+        <com.github.chrisbanes.photoview.PhotoView
+            android:id="@+id/dailyPic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|bottom"
+            android:visibility="gone"
+            android:src="@drawable/paragonweekly"/>
+        <com.github.chrisbanes.photoview.PhotoView
+            android:id="@+id/weeklyPic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|bottom"
+            android:visibility="visible"
+            android:src="@drawable/daily"/>
+
 
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/dailyPic"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        android:src="@drawable/paragonweekly"/>
+        android:orientation="horizontal">
+    <Button
+        android:id="@+id/dailyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#00FFFFFF"
+        android:gravity="center_horizontal"
+        android:text="Specials of the Day"
+        android:textAlignment="center"
+        android:textColor="#FFFF" />
 
-    <ImageView
-        android:id="@+id/weeklyPic"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible"
-        android:src="@drawable/daily"/>
+    <Button
+        android:id="@+id/weeklyButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:backgroundTint="#00FFFFFF"
+        android:gravity="center_horizontal"
+        android:text="Specials of the Week"
+        android:textAlignment="center"
+        android:textColor="#FFFF" />
+    </LinearLayout>
+
+
+
 
 
 </RelativeLayout>
