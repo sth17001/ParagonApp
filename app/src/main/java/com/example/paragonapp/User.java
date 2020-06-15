@@ -10,7 +10,6 @@ public class User {
     //String email;
     String username;
     String password;
-    boolean login;
 
     public User(String username, String password) {
         //this.email = email;

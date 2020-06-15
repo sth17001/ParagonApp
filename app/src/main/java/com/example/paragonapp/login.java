@@ -8,6 +8,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -42,38 +43,10 @@ public class login extends AppCompatActivity {
         System.out.println(userArrayList.get(3).getUsername() + ", " + userArrayList.get(3).getPassword());
 
         if (canLogin(currentUser)) {
-            Toast.makeText(login.this, "Logged in succesfully!", LENGTH_LONG).show();
-        } else {
-            Toast.makeText(login.this, "Login FAILED!", LENGTH_LONG).show();
+            Intent create = new Intent(login.this, loggedIn.class);
+            startActivity(create);
+            //Toast.makeText(login.this, "Logged in succesfully!", LENGTH_LONG).show();
         }
-
-        /*userRef.child("1").child("password").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                System.out.println("Value is: " + value);
-                System.out.println("userclass password is: " + user.getPassword());
-                if(user.getPassword().equals(value)) {
-                    canLogin = true;
-                    System.out.println("can login!");
-                } else {
-                    System.out.println("cannot login!");
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                System.out.println("Failed to read value.");
-            }
-        });
-
-        if (currentUser.accessFirebase(userRef) == true) {
-            Toast.makeText(login.this, "Logged in succesfully!", LENGTH_LONG).show();
-        } else {
-            Toast.makeText(login.this, "Login FAILED!", LENGTH_LONG).show();
-        }*/
 
     }
     public void downloadFirebase() {
@@ -106,7 +79,7 @@ public class login extends AppCompatActivity {
                 userFound = true;
                 if (currentUser.getPassword().equals(userArrayList.get(i).getPassword())) {
                     canLogin = true;
-                    Toast.makeText(login.this, "Logged in succesfully!", LENGTH_LONG).show();
+                    Toast.makeText(login.this, "Welcome back " + currentUser.getUsername(), LENGTH_LONG).show();
                 } else {
                     System.out.println("Incorrect password!");
                     Toast.makeText(login.this, "Incorrect username/password.", LENGTH_LONG).show();
