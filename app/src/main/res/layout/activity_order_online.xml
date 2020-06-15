@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
 
             ></LinearLayout>
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <ImageButton
                 android:id="@+id/grilledBTN"
@@ -39,7 +39,14 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/grilled"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp"
+                android:visibility="visible"/>
+            <ListView
+                android:id="@+id/grilledListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginBottom="45dp"/>
 
             <ImageButton
                 android:id="@+id/friedBTN"
@@ -50,7 +57,8 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/fries"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp"
+                android:visibility="gone"/>
 
             <ImageButton
                 android:id="@+id/sandwichBTN"
@@ -61,7 +69,8 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/club"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp"
+                android:visibility="gone"/>
 
             <ImageButton
                 android:id="@+id/specialBTN"
@@ -72,7 +81,9 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/pepsi"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp"
+                android:visibility="gone"/>
+
 
             ></LinearLayout>
 
