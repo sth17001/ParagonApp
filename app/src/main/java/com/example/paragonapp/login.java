@@ -35,11 +35,20 @@ public class login extends AppCompatActivity {
     public void logIn(View view) throws InterruptedException {
         getUsername = (EditText) findViewById(R.id.usernameEdit);
         getPassword = (EditText) findViewById(R.id.passwordEdit);
+        int userNum = 0;
 
         User currentUser = new User(getUsername.getText().toString(), getPassword.getText().toString());
         System.out.println(currentUser.getUsername() + ", " + currentUser.getPassword());
 
-        System.out.println(userArrayList.get(1).getUsername() + ", " + userArrayList.get(1).getPassword());
+        System.out.println(userArrayList.get(3).getUsername() + ", " + userArrayList.get(3).getPassword());
+
+        for (int i = 0; i <= userNum; i++) {
+            if (currentUser.getUsername().equals(userArrayList.get(i).getUsername())) {
+                if (currentUser.getPassword().equals(userArrayList.get(i).getPassword())) {
+                    Toast.makeText(login.this, "Logged in succesfully!", LENGTH_LONG).show();
+                }
+            }
+        }
 
         /*userRef.child("1").child("password").addValueEventListener(new ValueEventListener() {
             @Override
@@ -91,5 +100,20 @@ public class login extends AppCompatActivity {
                 System.out.println("Failed to read value.");
             }
         });
+    }
+    public boolean canLogin(User currentUser) {
+        int userNum = 0;
+        for (int i = 0; i <= userNum; i++) {
+            if (currentUser.getUsername().equals(userArrayList.get(i).getUsername())) {
+                if (currentUser.getPassword().equals(userArrayList.get(i).getPassword())) {
+                    return true;
+                    Toast.makeText(login.this, "Logged in succesfully!", LENGTH_LONG).show();
+                } else {
+                    return false;
+                    System.out.println("incorrect password!");
+                    Toast.makeText(login.this, "Incorrect username/password.", LENGTH_LONG).show();
+                }
+            }
+        }
     }
 }
