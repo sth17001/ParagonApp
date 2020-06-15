@@ -35,20 +35,11 @@ public class login extends AppCompatActivity {
     public void logIn(View view) throws InterruptedException {
         getUsername = (EditText) findViewById(R.id.usernameEdit);
         getPassword = (EditText) findViewById(R.id.passwordEdit);
-        int userNum = 0;
 
         User currentUser = new User(getUsername.getText().toString(), getPassword.getText().toString());
         System.out.println(currentUser.getUsername() + ", " + currentUser.getPassword());
 
         System.out.println(userArrayList.get(3).getUsername() + ", " + userArrayList.get(3).getPassword());
-
-        for (int i = 0; i <= userNum; i++) {
-            if (currentUser.getUsername().equals(userArrayList.get(i).getUsername())) {
-                if (currentUser.getPassword().equals(userArrayList.get(i).getPassword())) {
-                    Toast.makeText(login.this, "Logged in succesfully!", LENGTH_LONG).show();
-                }
-            }
-        }
 
         /*userRef.child("1").child("password").addValueEventListener(new ValueEventListener() {
             @Override
@@ -102,18 +93,24 @@ public class login extends AppCompatActivity {
         });
     }
     public boolean canLogin(User currentUser) {
-        int userNum = 0;
-        for (int i = 0; i <= userNum; i++) {
+        boolean userFound = false;
+        boolean canLogin = false;
+        for (int i = 0; i < userArrayList.size(); i++) {
             if (currentUser.getUsername().equals(userArrayList.get(i).getUsername())) {
+                userFound = true;
                 if (currentUser.getPassword().equals(userArrayList.get(i).getPassword())) {
-                    return true;
+                    canLogin = true;
                     Toast.makeText(login.this, "Logged in succesfully!", LENGTH_LONG).show();
                 } else {
-                    return false;
-                    System.out.println("incorrect password!");
+                    System.out.println("Incorrect password!");
                     Toast.makeText(login.this, "Incorrect username/password.", LENGTH_LONG).show();
                 }
             }
         }
+        if (userFound == false) {
+            System.out.println("Invalid user!");
+            Toast.makeText(login.this, "Incorrect username/password.", LENGTH_LONG).show();
+        }
+        return canLogin;
     }
 }
