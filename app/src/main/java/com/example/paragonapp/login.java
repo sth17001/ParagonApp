@@ -34,10 +34,12 @@ public class login extends AppCompatActivity {
 
         User savedUser = new User();
         loadUser(savedUser);
-        loadUsername = (EditText) findViewById(R.id.usernameEdit);
-        loadPassword = (EditText) findViewById(R.id.passwordEdit);
-        loadUsername.setText(savedUser.getUsername());
-        loadPassword.setText(savedUser.getPassword());
+        if (savedUser.getUsername() != null) {
+            loadUsername = (EditText) findViewById(R.id.usernameEdit);
+            loadPassword = (EditText) findViewById(R.id.passwordEdit);
+            loadUsername.setText(savedUser.getUsername());
+            loadPassword.setText(savedUser.getPassword());
+        }
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         userRef = database.getReference("Users");
@@ -96,7 +98,7 @@ public class login extends AppCompatActivity {
                 userFound = true;
                 if (currentUser.getPassword().equals(userArrayList.get(i).getPassword())) {
                     canLogin = true;
-                    Toast.makeText(login.this, "Welcome back " + currentUser.getUsername(), LENGTH_LONG).show();
+                    Toast.makeText(login.this, "Logged in as " + currentUser.getUsername(), LENGTH_LONG).show();
                 } else {
                     System.out.println("Incorrect password!");
                     Toast.makeText(login.this, "Incorrect username/password.", LENGTH_LONG).show();
@@ -112,7 +114,7 @@ public class login extends AppCompatActivity {
 
     public void saveUser(User currentUser) {
         String preferences = null;
-        SharedPreferences sharedpreferences = getSharedPreferences(preferences, 0);
+        SharedPreferences sharedpreferences = getPreferences(0);
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.putString("username", currentUser.getUsername());
         editor.putString("password", currentUser.getPassword());
@@ -121,7 +123,7 @@ public class login extends AppCompatActivity {
 
     public void loadUser(User currentUser) {
         String preferences = null;
-        SharedPreferences sharedpreferences = getSharedPreferences(preferences, 0);
+        SharedPreferences sharedpreferences = getPreferences(0);
         currentUser.setUsername(sharedpreferences.getString("username", "null"));
         currentUser.setPassword(sharedpreferences.getString("password", "null"));
     }
