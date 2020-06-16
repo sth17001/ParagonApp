@@ -3,7 +3,9 @@ package com.example.paragonapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -36,6 +38,7 @@ public class OrderOnline extends AppCompatActivity {
     DatabaseReference grilledDatabase, friedDatabase, specialDatabase;
     HashMap<String, String> grillAndPrice = new HashMap<>();
     HashMap<String, String> friedAndPrice = new HashMap<>();
+    Boolean isMenu;
 
     HashMap<String, String> specialAndPrice = new HashMap<>();
     List<HashMap<String, String>> listOfGrilledItems = new ArrayList<>();
@@ -47,6 +50,8 @@ public class OrderOnline extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_online);
+
+        isMenu = true;
 
         cartItemsL = (ListView)findViewById(R.id.cartItems);
         grilledItemsL = (ListView)findViewById(R.id.grilledListView);
@@ -175,6 +180,7 @@ public class OrderOnline extends AppCompatActivity {
                 cartLayout.setVisibility(View.VISIBLE);
                 menuLayout.setVisibility(View.GONE);
                 checkoutLayout.setVisibility(View.GONE);
+                isMenu = false;
             }
         });
 
@@ -196,6 +202,8 @@ public class OrderOnline extends AppCompatActivity {
                 friedImage.setVisibility(View.GONE);
                 specialImage.setVisibility(View.GONE);
 
+                isMenu = true;
+
             }
         });
 
@@ -205,6 +213,8 @@ public class OrderOnline extends AppCompatActivity {
                 cartLayout.setVisibility(View.GONE);
                 menuLayout.setVisibility(View.GONE);
                 checkoutLayout.setVisibility(View.VISIBLE);
+
+                isMenu = false;
             }
         });
 
@@ -218,6 +228,8 @@ public class OrderOnline extends AppCompatActivity {
                 specialImage.setVisibility(View.VISIBLE);
                 specialItemsL.setVisibility(View.VISIBLE);
 
+                isMenu = false;
+
             }
         });
 
@@ -230,6 +242,8 @@ public class OrderOnline extends AppCompatActivity {
 
                 friedImage.setVisibility(View.VISIBLE);
                 friedItemsL.setVisibility(View.VISIBLE);
+
+                isMenu = false;
             }
         });
         grilledIbtn.setOnClickListener(new View.OnClickListener() {
@@ -242,7 +256,37 @@ public class OrderOnline extends AppCompatActivity {
                 grilledImage.setVisibility(View.VISIBLE);
                 grilledItemsL.setVisibility(View.VISIBLE);
 
+                isMenu = false;
+
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        Log.d("CDA", "onBackPressed Called");
+        Intent setIntent = new Intent(Intent.ACTION_MAIN);
+        setIntent.addCategory(Intent.CATEGORY_HOME);
+        setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        if (isMenu.equals(true)) {
+            finish();
+        }
+        else {
+            cartLayout.setVisibility(View.GONE);
+            menuLayout.setVisibility(View.VISIBLE);
+            checkoutLayout.setVisibility(View.GONE);
+            friedIbtn.setVisibility(View.VISIBLE);
+            grilledIbtn.setVisibility(View.VISIBLE);
+            specialIbtn.setVisibility(View.VISIBLE);
+            grilledItemsL.setVisibility(View.GONE);
+            friedItemsL.setVisibility(View.GONE);
+            specialItemsL.setVisibility(View.GONE);
+            grilledImage.setVisibility(View.GONE);
+            friedImage.setVisibility(View.GONE);
+            specialImage.setVisibility(View.GONE);
+
+            isMenu = true;
+        }
+
     }
 }
