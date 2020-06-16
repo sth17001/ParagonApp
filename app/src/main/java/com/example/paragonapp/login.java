@@ -35,6 +35,7 @@ public class login extends AppCompatActivity {
         User savedUser = new User();
         loadUser(savedUser);
         System.out.println(savedUser.getUsername());
+
         if (savedUser.getUsername() != "null") {
             loadUsername = (EditText) findViewById(R.id.usernameEdit);
             loadPassword = (EditText) findViewById(R.id.passwordEdit);
@@ -47,6 +48,11 @@ public class login extends AppCompatActivity {
         downloadFirebase();
     }
 
+    public void signUpActivity(View view) {
+        Intent create = new Intent(login.this, SignUp.class);
+        startActivity(create);
+    }
+
     public void logIn(View view) throws InterruptedException {
         rememberChecked = ((CheckBox) findViewById(R.id.rememberCheck)).isChecked();
 
@@ -55,8 +61,6 @@ public class login extends AppCompatActivity {
 
         User currentUser = new User(getUsername.getText().toString(), getPassword.getText().toString());
         System.out.println(currentUser.getUsername() + ", " + currentUser.getPassword());
-
-        System.out.println(userArrayList.get(3).getUsername() + ", " + userArrayList.get(3).getPassword());
 
         if (canLogin(currentUser)) {
             if (rememberChecked) {
