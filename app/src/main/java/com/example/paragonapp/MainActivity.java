@@ -4,34 +4,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-Button btnGuest;
-Button btnLogin;
+    private static int SPLASH_TIME_OUT = 2000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnGuest = (Button)findViewById(R.id.guestbtn);
-        btnLogin = (Button)findViewById(R.id.loginbtn);
-
-        btnGuest.setOnClickListener(new View.OnClickListener() {
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onClick(View v) {
-                Intent create = new Intent(MainActivity.this, loggedIn.class);
-                startActivity(create);
+            public void run() {
+                Intent homeIntent = new Intent(MainActivity.this, Home.class);
+                startActivity(homeIntent);
+                finish();
             }
-        });
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent create = new Intent(MainActivity.this, login.class);
-                startActivity(create);
-            }
-        });
+        }, SPLASH_TIME_OUT);
     }
 }
 
