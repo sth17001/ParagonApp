@@ -34,7 +34,8 @@ public class login extends AppCompatActivity {
 
         User savedUser = new User();
         loadUser(savedUser);
-        if (savedUser.getUsername() != null) {
+        System.out.println(savedUser.getUsername());
+        if (savedUser.getUsername() != "null") {
             loadUsername = (EditText) findViewById(R.id.usernameEdit);
             loadPassword = (EditText) findViewById(R.id.passwordEdit);
             loadUsername.setText(savedUser.getUsername());
@@ -127,4 +128,5 @@ public class login extends AppCompatActivity {
         currentUser.setUsername(sharedpreferences.getString("username", "null"));
         currentUser.setPassword(sharedpreferences.getString("password", "null"));
     }
+
 }
