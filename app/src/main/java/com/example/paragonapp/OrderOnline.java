@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -27,13 +28,19 @@ import java.util.Map;
 
 public class OrderOnline extends AppCompatActivity {
     List emptyList = new ArrayList<String>();
-    ListView cartItemsL, grilledItemsL, friedItemsL, sandwichesL, specialL;
+    ListView cartItemsL, grilledItemsL, friedItemsL, specialItemsL;
+    ImageButton grilledImage, friedImage, specialImage;
     LinearLayout checkoutLayout, menuLayout, cartLayout;
     Button menuBtn, cartBtn, checkoutBtn;
-    ImageButton grilledIbtn, friedIbtn, sandwichIbtn, specialIbtn;
-    DatabaseReference grilledDatabase, friedDatabase, sandwichDatabase, specialDatabase;
-    HashMap<String, String> itemAndPrice = new HashMap<>();
-    List<HashMap<String, String>> listOfItems = new ArrayList<>();
+    ImageButton grilledIbtn, friedIbtn, specialIbtn;
+    DatabaseReference grilledDatabase, friedDatabase, specialDatabase;
+    HashMap<String, String> grillAndPrice = new HashMap<>();
+    HashMap<String, String> friedAndPrice = new HashMap<>();
+
+    HashMap<String, String> specialAndPrice = new HashMap<>();
+    List<HashMap<String, String>> listOfGrilledItems = new ArrayList<>();
+    List<HashMap<String, String>> listOfFriedItems = new ArrayList<>();
+    List<HashMap<String, String>> listOfSpecialItems = new ArrayList<>();
     List usedItems = new ArrayList<String>();
 
     @Override
@@ -43,8 +50,12 @@ public class OrderOnline extends AppCompatActivity {
 
         cartItemsL = (ListView)findViewById(R.id.cartItems);
         grilledItemsL = (ListView)findViewById(R.id.grilledListView);
-        //cartItemsL = (ListView)findViewById(R.id.cartItems);
-        //cartItemsL = (ListView)findViewById(R.id.cartItems);
+        friedItemsL = (ListView)findViewById(R.id.friedListView);
+        specialItemsL = (ListView)findViewById(R.id.specialListView);
+
+        grilledImage = (ImageButton)findViewById(R.id.grilledImage);
+        friedImage = (ImageButton)findViewById(R.id.friedImage);
+        specialImage = (ImageButton)findViewById(R.id.specialImage);
 
         checkoutLayout = (LinearLayout) findViewById(R.id.checkout);
         menuLayout = (LinearLayout)findViewById(R.id.menu);
@@ -56,27 +67,30 @@ public class OrderOnline extends AppCompatActivity {
 
         grilledIbtn = (ImageButton) findViewById(R.id.grilledBTN);
         friedIbtn = (ImageButton) findViewById(R.id.friedBTN);
-        sandwichIbtn = (ImageButton) findViewById(R.id.sandwichBTN);
         specialIbtn = (ImageButton) findViewById(R.id.specialBTN);
 
-        //Load GrilledItems
+        //access database for items
         grilledDatabase = FirebaseDatabase.getInstance().getReference().child("GrilledItems");
+        friedDatabase = FirebaseDatabase.getInstance().getReference().child("FriedItems");
+        specialDatabase = FirebaseDatabase.getInstance().getReference().child("SpecialItems");
+
+        //Load GrilledItems
         grilledDatabase.addListenerForSingleValueEvent(new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot data: dataSnapshot.getChildren()){
                     Item item = new Item (data.child("name").getValue().toString(), data.child("price").getValue().toString());
-                    itemAndPrice.put(item.getName(), item.getPrice());
+                    grillAndPrice.put(item.getName(), item.getPrice());
                 }
 
-                SimpleAdapter adapter = new SimpleAdapter(OrderOnline.this, listOfItems, R.layout.list_view, new String[]{"1", "2"}, new int[]{R.id.text1, R.id.text2});
-                Iterator it = itemAndPrice.entrySet().iterator();
+                SimpleAdapter adapter = new SimpleAdapter(OrderOnline.this, listOfGrilledItems, R.layout.list_view, new String[]{"1", "2"}, new int[]{R.id.text1, R.id.text2});
+                Iterator it = grillAndPrice.entrySet().iterator();
                 while (it.hasNext()) {
                     HashMap<String, String> resultsMap = new HashMap<>();
                     Map.Entry pair = (Map.Entry)it.next();
                     resultsMap.put("1", pair.getKey().toString());
                     resultsMap.put("2", "$"+pair.getValue().toString());
-                    listOfItems.add(resultsMap);
+                    listOfGrilledItems.add(resultsMap);
 
                 }
                 grilledItemsL.setAdapter(adapter);
@@ -89,8 +103,64 @@ public class OrderOnline extends AppCompatActivity {
 
         });
 
+        friedDatabase.addListenerForSingleValueEvent(new ValueEventListener(){
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data: dataSnapshot.getChildren()){
+                    Item item = new Item (data.child("name").getValue().toString(), data.child("price").getValue().toString());
+                    friedAndPrice.put(item.getName(), item.getPrice());
+                }
+
+                SimpleAdapter adapter = new SimpleAdapter(OrderOnline.this, listOfFriedItems, R.layout.list_view, new String[]{"1", "2"}, new int[]{R.id.text1, R.id.text2});
+                Iterator it = friedAndPrice.entrySet().iterator();
+                while (it.hasNext()) {
+                    HashMap<String, String> resultsMap = new HashMap<>();
+                    Map.Entry pair = (Map.Entry)it.next();
+                    resultsMap.put("1", pair.getKey().toString());
+                    resultsMap.put("2", "$"+pair.getValue().toString());
+                    listOfFriedItems.add(resultsMap);
+
+                }
+                friedItemsL.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+
+        specialDatabase.addListenerForSingleValueEvent(new ValueEventListener(){
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data: dataSnapshot.getChildren()){
+                    Item item = new Item (data.child("name").getValue().toString(), data.child("price").getValue().toString());
+                    specialAndPrice.put(item.getName(), item.getPrice());
+                }
+
+                SimpleAdapter adapter = new SimpleAdapter(OrderOnline.this, listOfSpecialItems, R.layout.list_view, new String[]{"1", "2"}, new int[]{R.id.text1, R.id.text2});
+                Iterator it = specialAndPrice.entrySet().iterator();
+                while (it.hasNext()) {
+                    HashMap<String, String> resultsMap = new HashMap<>();
+                    Map.Entry pair = (Map.Entry)it.next();
+                    resultsMap.put("1", pair.getKey().toString());
+                    resultsMap.put("2", "$"+pair.getValue().toString());
+                    listOfSpecialItems.add(resultsMap);
+
+                }
+                specialItemsL.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
 
 
+        //TODO change this
         for (Integer i = 0; i < 10; i++) {
             emptyList.add("   ");
         }
@@ -108,20 +178,23 @@ public class OrderOnline extends AppCompatActivity {
             }
         });
 
+        OrderOnline.onBackPressed()
+
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 cartLayout.setVisibility(View.GONE);
                 menuLayout.setVisibility(View.VISIBLE);
                 checkoutLayout.setVisibility(View.GONE);
-                sandwichIbtn.setVisibility(View.VISIBLE);
                 friedIbtn.setVisibility(View.VISIBLE);
                 grilledIbtn.setVisibility(View.VISIBLE);
                 specialIbtn.setVisibility(View.VISIBLE);
                 grilledItemsL.setVisibility(View.GONE);
-               // friedItemsL.setVisibility(View.GONE);
-                //sandwichesL.setVisibility(View.GONE);
-                //specialL.setVisibility(View.GONE);
+                friedItemsL.setVisibility(View.GONE);
+                specialItemsL.setVisibility(View.GONE);
+                grilledImage.setVisibility(View.GONE);
+                friedImage.setVisibility(View.GONE);
+                specialImage.setVisibility(View.GONE);
 
             }
         });
@@ -138,33 +211,35 @@ public class OrderOnline extends AppCompatActivity {
         specialIbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sandwichIbtn.setVisibility(View.GONE);
-                friedIbtn.setVisibility(View.GONE);
-                grilledIbtn.setVisibility(View.GONE);
-            }
-        });
-        sandwichIbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 specialIbtn.setVisibility(View.GONE);
                 friedIbtn.setVisibility(View.GONE);
                 grilledIbtn.setVisibility(View.GONE);
+
+                specialImage.setVisibility(View.VISIBLE);
+                specialItemsL.setVisibility(View.VISIBLE);
+
             }
         });
+
         friedIbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sandwichIbtn.setVisibility(View.GONE);
                 specialIbtn.setVisibility(View.GONE);
+                friedIbtn.setVisibility(View.GONE);
                 grilledIbtn.setVisibility(View.GONE);
+
+                friedImage.setVisibility(View.VISIBLE);
+                friedItemsL.setVisibility(View.VISIBLE);
             }
         });
         grilledIbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sandwichIbtn.setVisibility(View.GONE);
-                friedIbtn.setVisibility(View.GONE);
                 specialIbtn.setVisibility(View.GONE);
+                friedIbtn.setVisibility(View.GONE);
+                grilledIbtn.setVisibility(View.GONE);
+
+                grilledImage.setVisibility(View.VISIBLE);
                 grilledItemsL.setVisibility(View.VISIBLE);
 
             }
