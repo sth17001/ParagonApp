@@ -22,6 +22,7 @@ import static android.widget.Toast.LENGTH_LONG;
 
 public class login extends AppCompatActivity {
     EditText getUsername, getPassword;
+    EditText loadUsername, loadPassword;
     DatabaseReference userRef;
     ArrayList<User> userArrayList = new ArrayList<User>();
     Boolean rememberChecked;
@@ -30,6 +31,13 @@ public class login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        User savedUser = new User();
+        loadUser(savedUser);
+        loadUsername = (EditText) findViewById(R.id.usernameEdit);
+        loadPassword = (EditText) findViewById(R.id.passwordEdit);
+        loadUsername.setText(savedUser.getUsername());
+        loadPassword.setText(savedUser.getPassword());
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         userRef = database.getReference("Users");
@@ -50,7 +58,7 @@ public class login extends AppCompatActivity {
         if (canLogin(currentUser)) {
             if (rememberChecked) {
                 saveUser(currentUser);
-                System.out.println("user saved.");
+                System.out.println("user saved: " + currentUser.getUsername());
             }
             Intent create = new Intent(login.this, loggedIn.class);
             startActivity(create);
