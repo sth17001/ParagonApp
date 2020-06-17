@@ -45,7 +45,7 @@ public class login extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         userRef = database.getReference("Users");
-        downloadFirebase();
+        downloadUsers();
     }
 
     public void signUpActivity(View view) {
@@ -73,7 +73,7 @@ public class login extends AppCompatActivity {
         }
 
     }
-    public void downloadFirebase() {
+    public void downloadUsers() {
 
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
