@@ -43,16 +43,13 @@ public class SignUp extends AppCompatActivity {
             userRef.child(newUser.getUsername() + "ID").setValue(newUser);
             System.out.println("Signed up: " + newUser.getUsername());
             Toast.makeText(SignUp.this, "Welcome " + newUser.getUsername(), LENGTH_LONG).show();
-        }/* else {
-            System.out.println("Password does not match.");
-            Toast.makeText(SignUp.this, "Password does not match.", LENGTH_LONG).show();
-        }*/
+        }
     }
 
     public boolean canSignup(User newUser, String passwordConfirm) {
-        if (newUser.getUsername() != ""
-                || newUser.getPassword() != ""
-                || newUser.getEmail() != "") {
+        if (!newUser.getUsername().equals("")
+                && !newUser.getPassword().equals("")
+                && !newUser.getEmail().equals("")) {
             if (passwordConfirm.equals(newUser.getPassword())) {
                 return true;
             } else {
