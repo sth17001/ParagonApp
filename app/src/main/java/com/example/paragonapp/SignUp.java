@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import static android.widget.Toast.LENGTH_LONG;
 
 public class SignUp extends AppCompatActivity {
     EditText getUsername, getPassword, getEmail, getPasswordConfirm;
@@ -37,23 +40,26 @@ public class SignUp extends AppCompatActivity {
                 + newUser.getPassword());
 
         if (canSignup(newUser, passwordConfirm) == true) {
-            userRef.child(newUser.getUsername()).setValue(newUser);
+            //userRef.child(newUser.getUsername()).setValue(newUser);
             System.out.println("Signed up: " + newUser.getUsername());
+            Toast.makeText(SignUp.this, "Welcome " + newUser.getUsername(), LENGTH_LONG).show();
         } else {
             System.out.println("Password does not match.");
+            Toast.makeText(SignUp.this, "Password does not match.", LENGTH_LONG).show();
         }
     }
 
     public boolean canSignup(User newUser, String passwordConfirm) {
-        if (newUser.getUsername() != ""
-                && newUser.getPassword() != ""
-                && newUser.getEmail() != "") {
+        if (newUser.getUsername() != null
+                || newUser.getPassword() != null
+                || newUser.getEmail() != null) {
             if (passwordConfirm.equals(newUser.getPassword())) {
                 return true;
             } else {
                 return false;
             }
         } else {
+            Toast.makeText(SignUp.this, "Please enter all the credentials.", LENGTH_LONG).show();
             return false;
         }
 
