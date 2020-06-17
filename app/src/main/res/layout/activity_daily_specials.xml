@@ -7,13 +7,12 @@
     android:background="@drawable/darkbacon"
     tools:context=".DailySpecials">
 
+
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-
-
 
         <com.github.chrisbanes.photoview.PhotoView
             android:id="@+id/dailyPic"
@@ -29,10 +28,31 @@
             android:layout_gravity="center|bottom"
             android:visibility="visible"
             android:src="@drawable/daily"/>
-
-
-
     </LinearLayout>
+
+    <Button
+        android:id="@+id/editDailySpecial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#00FFFFFF"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:text="Edit Daily Special"
+        android:textAlignment="center"
+        android:textColor="#FFFF"
+        android:visibility="visible"/>
+
+    <Button
+        android:id="@+id/editWeeklySpecial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#00FFFFFF"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:text="Edit Weekly Special"
+        android:textAlignment="center"
+        android:textColor="#FFFF"
+        android:visibility="visible"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -58,6 +78,8 @@
         android:text="Specials of the Week"
         android:textAlignment="center"
         android:textColor="#FFFF" />
+
+
     </LinearLayout>
 
 
