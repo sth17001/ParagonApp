@@ -7,13 +7,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -38,7 +43,11 @@ public class OrderOnline extends AppCompatActivity {
     DatabaseReference grilledDatabase, friedDatabase, specialDatabase;
     HashMap<String, String> grillAndPrice = new HashMap<>();
     HashMap<String, String> friedAndPrice = new HashMap<>();
+    List cart = new ArrayList<String>();
     Boolean isMenu;
+    BigDecimal total;
+    TextView textTotal;
+    int count = 10;
 
     HashMap<String, String> specialAndPrice = new HashMap<>();
     List<HashMap<String, String>> listOfGrilledItems = new ArrayList<>();
@@ -50,6 +59,8 @@ public class OrderOnline extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_online);
+
+        total = new BigDecimal("0");
 
         isMenu = true;
 
@@ -73,6 +84,8 @@ public class OrderOnline extends AppCompatActivity {
         grilledIbtn = (ImageButton) findViewById(R.id.grilledBTN);
         friedIbtn = (ImageButton) findViewById(R.id.friedBTN);
         specialIbtn = (ImageButton) findViewById(R.id.specialBTN);
+
+        textTotal = findViewById(R.id.total);
 
         //access database for items
         grilledDatabase = FirebaseDatabase.getInstance().getReference().child("GrilledItems");
@@ -166,12 +179,11 @@ public class OrderOnline extends AppCompatActivity {
 
 
         //TODO change this
-        for (Integer i = 0; i < 10; i++) {
-            emptyList.add("   ");
+        for (Integer i = 0; i < 9; i++) {
+            cart.add("   ");
         }
 
-        final ArrayAdapter adapter = new ArrayAdapter(OrderOnline.this, android.R.layout.simple_list_item_2, android.R.id.text1, emptyList);
-        Collections.sort(emptyList);
+        final ArrayAdapter adapter = new ArrayAdapter(OrderOnline.this, android.R.layout.simple_list_item_2, android.R.id.text1, cart);
         cartItemsL.setAdapter(adapter);
 
         cartBtn.setOnClickListener(new View.OnClickListener() {
@@ -257,6 +269,110 @@ public class OrderOnline extends AppCompatActivity {
                 grilledItemsL.setVisibility(View.VISIBLE);
 
                 isMenu = false;
+
+            }
+        });
+
+        grilledItemsL.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String s = parent.getItemAtPosition(position).toString();
+                String s1 = s.substring(s.indexOf("=")+1);
+                s1.trim();
+                String s2 = s1.substring(0, s1.indexOf(","));
+                System.out.println(total.toString() + " ================================================================================================================================================");
+                total = total.add(new BigDecimal(grillAndPrice.get(s2)));
+                textTotal.setText(total.toString());
+                cart.add(0, s2);
+                Toast.makeText(OrderOnline.this, "Added a " + s2 + " to your cart.", Toast.LENGTH_SHORT).show();
+                int last = cart.size() - 1;
+                if (cart.get(last).equals("   ")) {
+                    cart.remove(last);
+                }
+                final ArrayAdapter adapter = new ArrayAdapter(OrderOnline.this, android.R.layout.simple_list_item_2, android.R.id.text1, cart);
+                cartItemsL.setAdapter(adapter);
+
+            }
+        });
+        friedItemsL.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String s = parent.getItemAtPosition(position).toString();
+                String s1 = s.substring(s.indexOf("=")+1);
+                s1.trim();
+                String s2 = s1.substring(0, s1.indexOf(","));
+                System.out.println(total.toString() + " ================================================================================================================================================");
+                total = total.add(new BigDecimal(friedAndPrice.get(s2)));
+                textTotal.setText(total.toString());
+                cart.add(0, s2);
+                Toast.makeText(OrderOnline.this, "Added a " + s2 + " to your cart.", Toast.LENGTH_SHORT).show();
+                int last = cart.size() - 1;
+                if (cart.get(last).equals("   ")) {
+                    cart.remove(last);
+                }
+                final ArrayAdapter adapter = new ArrayAdapter(OrderOnline.this, android.R.layout.simple_list_item_2, android.R.id.text1, cart);
+                cartItemsL.setAdapter(adapter);
+
+            }
+        });
+        specialItemsL.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String s = parent.getItemAtPosition(position).toString();
+                String s1 = s.substring(s.indexOf("=")+1);
+                s1.trim();
+                String s2 = s1.substring(0, s1.indexOf(","));
+                System.out.println(total.toString() + " ================================================================================================================================================");
+                total = total.add(new BigDecimal(specialAndPrice.get(s2)));
+                textTotal.setText(total.toString());
+                cart.add(0, s2);
+                Toast.makeText(OrderOnline.this, "Added a " + s2 + " to your cart.", Toast.LENGTH_SHORT).show();
+                int last = cart.size() - 1;
+                if (cart.get(last).equals("   ")) {
+                    cart.remove(last);
+                }
+                final ArrayAdapter adapter = new ArrayAdapter(OrderOnline.this, android.R.layout.simple_list_item_2, android.R.id.text1, cart);
+                cartItemsL.setAdapter(adapter);
+
+            }
+        });
+        cartItemsL.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String s = parent.getItemAtPosition(position).toString();
+                System.out.println(s + " +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                ArrayAdapter addedAdapter = new ArrayAdapter(OrderOnline.this, android.R.layout.simple_list_item_2, android.R.id.text1, cart);
+                if (!cart.get(position).equals("   ")){
+                    cart.remove(position);
+                    //Toast.makeText(OrderOnline.this, "Removed " + cart.get(position) + " from your cart.", Toast.LENGTH_SHORT).show();
+                    addedAdapter.notifyDataSetChanged();
+                    cartItemsL.setAdapter(addedAdapter);
+                    if (grillAndPrice.containsKey(s)) {
+                        total = total.subtract(new BigDecimal(grillAndPrice.get(s)));
+                        total.setScale(2, BigDecimal.ROUND_HALF_UP);
+                        textTotal.setText(total.toString());
+                    }
+                    else if (friedAndPrice.containsKey(s)) {
+                        total = total.subtract(new BigDecimal(friedAndPrice.get(s)));
+                        total.setScale(2, BigDecimal.ROUND_HALF_UP);
+                        textTotal.setText(total.toString());
+                    }
+                    else if (specialAndPrice.containsKey(s)) {
+                        total = total.subtract(new BigDecimal(specialAndPrice.get(s)));
+                        total.setScale(2, BigDecimal.ROUND_HALF_UP);
+                        textTotal.setText(total.toString());
+                    }
+                    int last = cart.size();
+                    if (last <= 9) {
+                        cart.add("   ");
+                        final ArrayAdapter adapter = new ArrayAdapter(OrderOnline.this, android.R.layout.simple_list_item_2, android.R.id.text1, cart);
+                        cartItemsL.setAdapter(adapter);
+                    }
+
+                }
 
             }
         });

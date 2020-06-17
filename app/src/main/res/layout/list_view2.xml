@@ -15,17 +15,5 @@
         android:textStyle="bold"
         android:fontFamily="serif"/>
 
-    <TextView
-        android:id="@+id/text2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:fontFamily="serif"
-        android:text="2.99"
-        android:textColor="@android:color/tertiary_text_dark"
-        android:textSize="18sp"
-        android:textStyle="bold|italic" />
-
 
 </LinearLayout>
