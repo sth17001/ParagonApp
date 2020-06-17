@@ -45,10 +45,17 @@ public class SignUp extends AppCompatActivity {
     }
 
     public boolean canSignup(User newUser, String passwordConfirm) {
-        if (passwordConfirm.equals(newUser.getPassword())) {
-            return true;
+        if (newUser.getUsername() != ""
+                && newUser.getPassword() != ""
+                && newUser.getEmail() != "") {
+            if (passwordConfirm.equals(newUser.getPassword())) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
+
     }
 }
