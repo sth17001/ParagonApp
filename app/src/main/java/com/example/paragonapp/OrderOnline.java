@@ -281,7 +281,6 @@ public class OrderOnline extends AppCompatActivity {
                 String s1 = s.substring(s.indexOf("=")+1);
                 s1.trim();
                 String s2 = s1.substring(0, s1.indexOf(","));
-                System.out.println(total.toString() + " ================================================================================================================================================");
                 total = total.add(new BigDecimal(grillAndPrice.get(s2)));
                 textTotal.setText(total.toString());
                 cart.add(0, s2);
@@ -303,7 +302,6 @@ public class OrderOnline extends AppCompatActivity {
                 String s1 = s.substring(s.indexOf("=")+1);
                 s1.trim();
                 String s2 = s1.substring(0, s1.indexOf(","));
-                System.out.println(total.toString() + " ================================================================================================================================================");
                 total = total.add(new BigDecimal(friedAndPrice.get(s2)));
                 textTotal.setText(total.toString());
                 cart.add(0, s2);
@@ -400,7 +398,6 @@ public class OrderOnline extends AppCompatActivity {
             grilledImage.setVisibility(View.GONE);
             friedImage.setVisibility(View.GONE);
             specialImage.setVisibility(View.GONE);
-
             isMenu = true;
         }
 
