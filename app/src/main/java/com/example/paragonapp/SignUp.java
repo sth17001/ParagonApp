@@ -40,22 +40,24 @@ public class SignUp extends AppCompatActivity {
                 + newUser.getPassword());
 
         if (canSignup(newUser, passwordConfirm) == true) {
-            //userRef.child(newUser.getUsername()).setValue(newUser);
+            userRef.child(newUser.getUsername() + "ID").setValue(newUser);
             System.out.println("Signed up: " + newUser.getUsername());
             Toast.makeText(SignUp.this, "Welcome " + newUser.getUsername(), LENGTH_LONG).show();
-        } else {
+        }/* else {
             System.out.println("Password does not match.");
             Toast.makeText(SignUp.this, "Password does not match.", LENGTH_LONG).show();
-        }
+        }*/
     }
 
     public boolean canSignup(User newUser, String passwordConfirm) {
-        if (newUser.getUsername() != null
-                || newUser.getPassword() != null
-                || newUser.getEmail() != null) {
+        if (newUser.getUsername() != ""
+                || newUser.getPassword() != ""
+                || newUser.getEmail() != "") {
             if (passwordConfirm.equals(newUser.getPassword())) {
                 return true;
             } else {
+                System.out.println("Password does not match.");
+                Toast.makeText(SignUp.this, "Password does not match.", LENGTH_LONG).show();
                 return false;
             }
         } else {
