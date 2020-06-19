@@ -27,10 +27,15 @@ public class loggedIn extends AppCompatActivity {
         managerbtn = (Button)findViewById(R.id.managerbtn);
         paragonLogo = (ImageView)findViewById(R.id.paragonlogo);
 
-        Intent intent = getIntent();
-        userType = intent.getStringExtra("user_type");
-        username = intent.getStringExtra("user_name");
-        System.out.println("Username with the intent: " + username);
+        userType = "";
+        username = "";
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            userType = extras.getString("user_type");
+            username = extras.getString("user_name");
+            System.out.println("Username with the intent: " + username);
+        }
 
         if (userType.equals("admin")) {
             System.out.println("MANAGE ACCESS GRANTED");
