@@ -9,7 +9,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 public class loggedIn extends AppCompatActivity {
-ImageButton btnOrderOnline, btnDailySpecial;
+    ImageButton btnOrderOnline, btnDailySpecial;
+    String userType = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +18,13 @@ ImageButton btnOrderOnline, btnDailySpecial;
 
         btnOrderOnline = (ImageButton)findViewById(R.id.orderOnline);
         btnDailySpecial = (ImageButton)findViewById(R.id.dailySpecials);
+
+        Intent intent = getIntent();
+        userType = intent.getStringExtra("user_type");
+
+        if (userType.equals("admin")) {
+            System.out.println("MANAGE ACCESS GRANTED");
+        }
 
         btnOrderOnline.setOnClickListener(new View.OnClickListener() {
             @Override

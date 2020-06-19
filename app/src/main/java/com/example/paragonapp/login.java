@@ -26,7 +26,7 @@ public class login extends AppCompatActivity {
     DatabaseReference userRef;
     ArrayList<User> userArrayList = new ArrayList<User>();
     Boolean rememberChecked;
-    String userType = "user";
+    String userType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,7 @@ public class login extends AppCompatActivity {
     }
 
     public void logIn(View view) throws InterruptedException {
+        userType = "user";
         rememberChecked = ((CheckBox) findViewById(R.id.rememberCheck)).isChecked();
 
         getUsername = (EditText) findViewById(R.id.usernameEdit);
@@ -73,10 +74,10 @@ public class login extends AppCompatActivity {
 
             if (isAdmin(currentUser) == true) {
                 userType = "admin";
-                System.out.println("MANAGER ACCESS");
+                System.out.println("MANAGER ACCESS REQUESTED");
             }
 
-            create.putExtra(userType, userType);
+            create.putExtra("user_type", userType);
 
             startActivity(create);
             //Toast.makeText(login.this, "Logged in succesfully!", LENGTH_LONG).show();
