@@ -33,11 +33,25 @@
             android:src="@drawable/specialphoto" />
 
         <ImageView
+            android:id="@+id/paragonlogo"
             android:layout_width="216dp"
             android:layout_height="88dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
+            android:visibility="visible"
             app:srcCompat="@drawable/whitetransparagon" />
+
+        <Button
+            android:id="@+id/managerbtn"
+            android:layout_width="216dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#830C0C"
+            android:text="Manager Options"
+            android:textSize="18dp"
+            android:visibility="gone"
+            />
         ></LinearLayout>
 
 
