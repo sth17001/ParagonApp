@@ -7,6 +7,20 @@
     android:background="@drawable/darkbacon"
     tools:context=".loggedIn">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="serif"
+        android:text="Choose an option:"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="32dp"
+        android:textStyle="bold|italic" />
 
 
     <LinearLayout
@@ -14,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:orientation="vertical">
+
 
         <ImageButton
             android:id="@+id/orderOnline"
@@ -32,27 +47,34 @@
 
             android:src="@drawable/specialphoto" />
 
-        <ImageView
-            android:id="@+id/paragonlogo"
-            android:layout_width="216dp"
-            android:layout_height="88dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:visibility="visible"
-            app:srcCompat="@drawable/whitetransparagon" />
-
         <Button
             android:id="@+id/managerbtn"
             android:layout_width="216dp"
             android:layout_height="75dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+
             android:backgroundTint="#830C0C"
             android:text="Manager Options"
             android:textSize="18dp"
             android:visibility="gone"
             />
+
+
         ></LinearLayout>
+
+    <ImageView
+        android:id="@+id/paragonlogo"
+        android:layout_width="164dp"
+        android:layout_height="54dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="18dp"
+        android:visibility="visible"
+        app:srcCompat="@drawable/whitetransparagon" />
 
 
 </RelativeLayout>

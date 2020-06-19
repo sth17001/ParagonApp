@@ -14,20 +14,22 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="290dp"
-            android:layout_height="103dp"
+            android:layout_width="318dp"
+            android:layout_height="147dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:src="@drawable/smalltranswhite" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tasty foods at affordable prices."
-            android:textSize="16dp"
             android:gravity="center"
-            android:textColor="@android:color/white"/>
+            android:text="Tasty foods at affordable prices."
+            android:textColor="@android:color/white"
+            android:textSize="16dp"
+            android:textStyle="italic" />
     ></LinearLayout>
 
     <LinearLayout
@@ -38,17 +40,6 @@
         android:orientation="horizontal">
 
 
-        <Button
-            android:id="@+id/guestbtn"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_margin="8dp"
-            android:backgroundTint="#830C0C"
-            android:text="Guest"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="14dp" />
 
         <Button
             android:id="@+id/loginbtn"
@@ -56,8 +47,19 @@
             android:layout_height="60dp"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:backgroundTint="#A55815"
+            android:backgroundTint="#830C0C"
             android:text="Sign In"
+            android:textColor="#FFFFFF"
+            android:textSize="14dp" />
+        <Button
+            android:id="@+id/guestbtn"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:backgroundTint="#A55815"
+            android:text="Guest"
+            android:layout_weight="1"
+            android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="14dp" />
 
