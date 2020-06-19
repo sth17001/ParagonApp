@@ -182,7 +182,7 @@ public class OrderOnline extends AppCompatActivity {
 
 
         //TODO change this
-        for (Integer i = 0; i < 9; i++) {
+        for (Integer i = 0; i < 7; i++) {
             cart.add("   ");
         }
 
@@ -287,6 +287,14 @@ public class OrderOnline extends AppCompatActivity {
             }
         });
 
+        payBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent create = new Intent(OrderOnline.this, FinalCheckoutScreen.class);
+                startActivity(create);
+            }
+        });
+
         grilledItemsL.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -378,7 +386,7 @@ public class OrderOnline extends AppCompatActivity {
                         textTotal.setText(total.toString());
                     }
                     int last = cart.size();
-                    if (last <= 9) {
+                    if (last <= 7) {
                         cart.add("   ");
                         final ArrayAdapter adapter = new ArrayAdapter(OrderOnline.this, android.R.layout.simple_list_item_2, android.R.id.text1, cart);
                         cartItemsL.setAdapter(adapter);
