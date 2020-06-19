@@ -7,18 +7,165 @@
     android:background="@android:color/white"
     tools:context=".OrderOnline">
 
+    <ImageView
+        android:id="@+id/checkoutLogo"
+        android:layout_width="327dp"
+        android:layout_height="223dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:src="@drawable/paragontrans"
+        android:visibility="gone"/>
+    <Button
+        android:id="@+id/payBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#931521"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:text="Pay"
+        android:fontFamily="serif"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:visibility="gone"/>
+    <LinearLayout
+        android:id="@+id/checkout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="serif"
+            android:text="CARDHOLDER NAME:"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="#CACACA"
+            android:fontFamily="serif"
+            android:inputType="textPersonName"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="serif"
+            android:text="CARD NUMBER:"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="#CACACA"
+            android:fontFamily="serif"
+            android:inputType="number"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="serif"
+            android:text="EXP DATE:    CVC:"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="2dp"
+                android:background="#CACACA"
+                android:fontFamily="serif"
+                android:inputType="number"
+                android:textColor="@android:color/black"
+
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:fontFamily="serif"
+                android:text="/"/>
+
+            <EditText
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:background="#CACACA"
+                android:fontFamily="serif"
+                android:inputType="number"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_width="47dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="23dp"
+                android:background="#CACACA"
+                android:fontFamily="serif"
+                android:inputType="number"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+            <CheckBox
+                android:id="@+id/isManager"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textColor="@android:color/primary_text_light_nodisable"
+                android:outlineAmbientShadowColor="@android:color/primary_text_light_nodisable"
+                android:textColorHighlight="@android:color/widget_edittext_dark"
+                android:outlineSpotShadowColor="@android:color/widget_edittext_dark"
+                android:buttonTint="@android:color/widget_edittext_dark"
+                android:text="Save Order"
+                android:fontFamily="serif"/>
+
+                ></LinearLayout>
+
+        ></LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <LinearLayout
-            android:id="@+id/checkout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:visibility="gone">
-            ></LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/menu"
@@ -69,7 +216,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/grilled"
-                android:visibility="gone"/>
+                android:visibility="visible"/>
             <ListView
                 android:id="@+id/grilledListView"
                 android:layout_width="match_parent"
@@ -90,7 +237,7 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/fries"
 
-                android:visibility="gone"/>
+                android:visibility="visible"/>
             <ListView
                 android:id="@+id/friedListView"
                 android:layout_width="match_parent"
@@ -111,7 +258,7 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/pepsi"
                 android:layout_marginBottom="45dp"
-                android:visibility="gone"/>
+                android:visibility="visible"/>
             <ListView
                 android:id="@+id/specialListView"
                 android:layout_width="match_parent"
@@ -130,7 +277,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <ListView
             android:id="@+id/cartItems"
@@ -188,6 +335,7 @@
             android:layout_weight="1"
             android:background="#FFFFFF"
             android:text="MENU"
+            android:fontFamily="serif"
             android:textColor="#780909"
             android:textStyle="bold" />
 
@@ -197,6 +345,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#FFFFFF"
+            android:fontFamily="serif"
             android:text="CART"
             android:textColor="#780909"
             android:textStyle="bold" />
@@ -205,6 +354,7 @@
             android:id="@+id/checkoutBTN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:layout_weight="1"
             android:background="#FFFFFF"
             android:text="CHECKOUT"

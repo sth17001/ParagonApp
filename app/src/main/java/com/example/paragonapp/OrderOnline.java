@@ -37,8 +37,9 @@ public class OrderOnline extends AppCompatActivity {
     List emptyList = new ArrayList<String>();
     ListView cartItemsL, grilledItemsL, friedItemsL, specialItemsL;
     ImageButton grilledImage, friedImage, specialImage;
+    ImageView checkoutLogo;
     LinearLayout checkoutLayout, menuLayout, cartLayout;
-    Button menuBtn, cartBtn, checkoutBtn;
+    Button menuBtn, cartBtn, checkoutBtn, payBtn;
     ImageButton grilledIbtn, friedIbtn, specialIbtn;
     DatabaseReference grilledDatabase, friedDatabase, specialDatabase;
     HashMap<String, String> grillAndPrice = new HashMap<>();
@@ -61,7 +62,6 @@ public class OrderOnline extends AppCompatActivity {
         setContentView(R.layout.activity_order_online);
 
         total = new BigDecimal("0");
-
         isMenu = true;
 
         cartItemsL = (ListView)findViewById(R.id.cartItems);
@@ -80,10 +80,13 @@ public class OrderOnline extends AppCompatActivity {
         cartBtn = (Button) findViewById(R.id.cartBTN);
         menuBtn = (Button) findViewById(R.id.menuBTN);
         checkoutBtn = (Button) findViewById(R.id.checkoutBTN);
+        payBtn = findViewById(R.id.payBtn);
 
         grilledIbtn = (ImageButton) findViewById(R.id.grilledBTN);
         friedIbtn = (ImageButton) findViewById(R.id.friedBTN);
         specialIbtn = (ImageButton) findViewById(R.id.specialBTN);
+        checkoutLogo = findViewById(R.id.checkoutLogo);
+
 
         textTotal = findViewById(R.id.total);
 
@@ -189,9 +192,13 @@ public class OrderOnline extends AppCompatActivity {
         cartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 cartLayout.setVisibility(View.VISIBLE);
+
                 menuLayout.setVisibility(View.GONE);
                 checkoutLayout.setVisibility(View.GONE);
+                checkoutLogo.setVisibility(View.GONE);
+                payBtn.setVisibility(View.GONE);
                 isMenu = false;
             }
         });
@@ -202,17 +209,21 @@ public class OrderOnline extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 cartLayout.setVisibility(View.GONE);
-                menuLayout.setVisibility(View.VISIBLE);
                 checkoutLayout.setVisibility(View.GONE);
-                friedIbtn.setVisibility(View.VISIBLE);
-                grilledIbtn.setVisibility(View.VISIBLE);
-                specialIbtn.setVisibility(View.VISIBLE);
+                checkoutLogo.setVisibility(View.GONE);
+                payBtn.setVisibility(View.GONE);
                 grilledItemsL.setVisibility(View.GONE);
                 friedItemsL.setVisibility(View.GONE);
                 specialItemsL.setVisibility(View.GONE);
                 grilledImage.setVisibility(View.GONE);
                 friedImage.setVisibility(View.GONE);
                 specialImage.setVisibility(View.GONE);
+
+                menuLayout.setVisibility(View.VISIBLE);
+                friedIbtn.setVisibility(View.VISIBLE);
+                grilledIbtn.setVisibility(View.VISIBLE);
+                specialIbtn.setVisibility(View.VISIBLE);
+
 
                 isMenu = true;
 
@@ -224,7 +235,10 @@ public class OrderOnline extends AppCompatActivity {
             public void onClick(View v) {
                 cartLayout.setVisibility(View.GONE);
                 menuLayout.setVisibility(View.GONE);
+
                 checkoutLayout.setVisibility(View.VISIBLE);
+                checkoutLogo.setVisibility(View.VISIBLE);
+                payBtn.setVisibility(View.VISIBLE);
 
                 isMenu = false;
             }
@@ -387,17 +401,21 @@ public class OrderOnline extends AppCompatActivity {
         }
         else {
             cartLayout.setVisibility(View.GONE);
-            menuLayout.setVisibility(View.VISIBLE);
             checkoutLayout.setVisibility(View.GONE);
-            friedIbtn.setVisibility(View.VISIBLE);
-            grilledIbtn.setVisibility(View.VISIBLE);
-            specialIbtn.setVisibility(View.VISIBLE);
+            checkoutLogo.setVisibility(View.GONE);
+            payBtn.setVisibility(View.GONE);
             grilledItemsL.setVisibility(View.GONE);
             friedItemsL.setVisibility(View.GONE);
             specialItemsL.setVisibility(View.GONE);
             grilledImage.setVisibility(View.GONE);
             friedImage.setVisibility(View.GONE);
             specialImage.setVisibility(View.GONE);
+
+            menuLayout.setVisibility(View.VISIBLE);
+            friedIbtn.setVisibility(View.VISIBLE);
+            grilledIbtn.setVisibility(View.VISIBLE);
+            specialIbtn.setVisibility(View.VISIBLE);
+
             isMenu = true;
         }
 
