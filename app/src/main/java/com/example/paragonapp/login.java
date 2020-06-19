@@ -78,6 +78,7 @@ public class login extends AppCompatActivity {
             }
 
             create.putExtra("user_type", userType);
+            create.putExtra("user_name", currentUser.getUsername());
 
             startActivity(create);
             //Toast.makeText(login.this, "Logged in succesfully!", LENGTH_LONG).show();
