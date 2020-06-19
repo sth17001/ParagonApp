@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.google.firebase.database.core.view.Change;
+
 public class loggedIn extends AppCompatActivity {
     ImageButton btnOrderOnline, btnDailySpecial;
     Button managerbtn;
@@ -48,6 +50,14 @@ public class loggedIn extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent create = new Intent(loggedIn.this, DailySpecials.class);
+                startActivity(create);
+            }
+        });
+
+        managerbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent create = new Intent(loggedIn.this, ChangeMenu.class);
                 startActivity(create);
             }
         });
