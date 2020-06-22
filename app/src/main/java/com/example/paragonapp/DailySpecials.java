@@ -39,30 +39,26 @@ private static final int GalleryPic = 1;
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
-                /*
-                Intent galleryIntent = new Intent();
-                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-                galleryIntent.setType("image/*");
-                startActivityForResult(galleryIntent,GalleryPic); */
+
             }
         });
 
         // Images for daily and weekly specials
         daily = (PhotoView) findViewById(R.id.dailyPic);
         paragonweekly = (PhotoView) findViewById(R.id.weeklyPic);
-
+        // Sets the Daily Special Photo visible and Weekly to Gone to show the Daily Special (Current)
         dailyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            daily.setVisibility(View.GONE);
-            paragonweekly.setVisibility(View.VISIBLE);
+            daily.setVisibility(View.VISIBLE);
+            paragonweekly.setVisibility(View.GONE);
                 // Code here executes on main thread after user presses button
             }
         });
         weeklyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                daily.setVisibility(View.VISIBLE);
-                paragonweekly.setVisibility(View.GONE);
+                daily.setVisibility(View.GONE);
+                paragonweekly.setVisibility(View.VISIBLE);
                 // Code here executes on main thread after user presses button
             }
         });
