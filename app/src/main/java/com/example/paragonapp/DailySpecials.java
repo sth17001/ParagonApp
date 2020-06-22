@@ -12,10 +12,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.github.chrisbanes.photoview.PhotoView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class DailySpecials extends AppCompatActivity {
 Button dailyButton,weeklyButton,editDailySpecial,editWeeklySpecial;
 PhotoView daily,paragonweekly;
+
+private Uri weeklyImageUrl;
+private StorageReference weeklyStorageRef;
+private DatabaseReference weeklyDataBaseRef;
 
 private static final int GalleryPic = 1;
 
@@ -23,6 +31,12 @@ private static final int GalleryPic = 1;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_specials);
+
+
+        //Uploading for fireBase
+        weeklyStorageRef = FirebaseStorage.getInstance().getReference("uploads");
+        weeklyDataBaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+
 
         //Buttons for Displaying Daily/Weekly specials
         dailyButton = (Button)findViewById(R.id.dailyButton);
@@ -74,6 +88,7 @@ private static final int GalleryPic = 1;
         if (requestCode == PICK_IMAGE) {
             Uri imageUri = data.getData();
             paragonweekly.setImageURI(imageUri);
+
         }
     }
 
