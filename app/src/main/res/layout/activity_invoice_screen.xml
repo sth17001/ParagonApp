@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FinalCheckoutScreen">
+    tools:context=".InvoiceScreen">
     <ImageView
         android:id="@+id/checkoutLogo"
         android:layout_width="327dp"
@@ -14,7 +14,7 @@
         android:src="@drawable/paragontrans"
         android:visibility="visible"/>
     <Button
-        android:id="@+id/finalBtn"
+        android:id="@+id/home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#931521"
@@ -22,7 +22,7 @@
         android:layout_marginRight="70dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="50dp"
-        android:text="Place Order"
+        android:text="Return to Home"
         android:fontFamily="serif"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
@@ -35,7 +35,7 @@
         android:orientation="vertical"
         android:visibility="visible">
         <TextView
-            android:id="@+id/finalTotal"
+            android:id="@+id/invoice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -49,7 +49,7 @@
 
 
 
-            ></LinearLayout>
+        ></LinearLayout>
 
 
 </RelativeLayout>

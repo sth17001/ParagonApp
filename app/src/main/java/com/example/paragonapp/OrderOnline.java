@@ -292,8 +292,53 @@ public class OrderOnline extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
                 Intent create = new Intent(OrderOnline.this, FinalCheckoutScreen.class);
-                startActivity(create);
+                EditText name = findViewById(R.id.name);
+                EditText cardNum, expDate1, expDate2, cvc;
+                cardNum = findViewById(R.id.cardNumber);
+                expDate1 = findViewById(R.id.date1);
+                expDate2 = findViewById(R.id.date2);
+                cvc = findViewById(R.id.cvc);
+                if (name.getText().toString().equals("")) {
+                    Toast.makeText(OrderOnline.this, "Please enter in a valid name", Toast.LENGTH_LONG).show();
+
+                }
+                else if (cardNum.getText().toString().equals("")) {
+                    Toast.makeText(OrderOnline.this, "Please enter in a valid credit card number", Toast.LENGTH_LONG).show();
+
+                }
+                else if (cardNum.getText().toString().length() < 16) {
+                    Toast.makeText(OrderOnline.this, "Please enter in a valid credit card number", Toast.LENGTH_LONG).show();
+                }
+                else if (expDate1.getText().toString().equals("")) {
+                    Toast.makeText(OrderOnline.this, "Please enter in a valid date", Toast.LENGTH_LONG).show();
+
+                }
+                else if (expDate1.getText().toString().length() < 2) {
+                    Toast.makeText(OrderOnline.this, "Please enter in a valid date", Toast.LENGTH_LONG).show();
+                }
+                else if (expDate2.getText().toString().equals("")) {
+                    Toast.makeText(OrderOnline.this, "Please enter in a valid date", Toast.LENGTH_LONG).show();
+
+                }
+                else if (expDate2.getText().toString().length() < 2) {
+                    Toast.makeText(OrderOnline.this, "Please enter in a valid date", Toast.LENGTH_LONG).show();
+                }
+                else if (cvc.getText().toString().equals("")) {
+                    Toast.makeText(OrderOnline.this, "Please enter in a valid cvc number", Toast.LENGTH_LONG).show();
+
+                }
+                else if (cvc.getText().toString().length() < 3) {
+                    Toast.makeText(OrderOnline.this, "Please enter in a valid cvc number", Toast.LENGTH_LONG).show();
+                }
+                
+                else {
+                    create.putExtra("name", name.getText().toString());
+                    create.putExtra("total", total.toString());
+                    create.putExtra("order", (ArrayList<String>) cart);
+                    startActivity(create);
+                }
             }
         });
 
