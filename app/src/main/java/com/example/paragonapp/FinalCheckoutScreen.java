@@ -1,19 +1,33 @@
 package com.example.paragonapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FinalCheckoutScreen extends AppCompatActivity {
 
-    String name, total, tempName;
+    String name, total, tempName, newInvoice, invoiceNumber;
     TextView totalView;
     BigDecimal totalBD, taxAmountBD, finalTotalBD;
     Button placeOrder;
+    List cartOrder = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +40,7 @@ public class FinalCheckoutScreen extends AppCompatActivity {
         if (extras != null) {
             name = extras.getString("name");
             total = extras.getString("total");
+            cartOrder =  extras.getStringArrayList("order");
         }
 
         totalView = findViewById(R.id.finalTotal);
@@ -63,6 +78,59 @@ public class FinalCheckoutScreen extends AppCompatActivity {
         totalView.setText("======================="+"\n" + tempName + ",\n\nPlease review the details below.\n\n" +
                 " \nTotal Before Tax: $" + totalBD.toString()+"\nTax Amount: $"+ taxAmountBD.toString() + "\n======================="+ "\n\nTotal: $"+ finalTotalBD.toString());
 
+        FirebaseDatabase database2 = FirebaseDatabase.getInstance();
+        final DatabaseReference table_invoice = database2.getReference("Orders");
+
+
+        final ProgressDialog mDialog = new ProgressDialog(FinalCheckoutScreen.this);
+        mDialog.setMessage("Generating invoice number");
+        mDialog.show();
+        table_invoice.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //search for the next empty number
+                Integer count = 1;
+                while (dataSnapshot.child(count.toString()).exists())
+                {
+                    count += 1;
+                }
+                mDialog.dismiss();
+
+                newInvoice =  count.toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference table_order = database.getReference("Orders");
+        placeOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                table_order.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Order order = new Order(cartOrder, tempName, totalBD.toString(), finalTotalBD.toString(), taxAmountBD.toString());
+                        table_order.child(newInvoice).setValue(order);
+                        Intent create = new Intent(FinalCheckoutScreen.this, InvoiceScreen.class);
+                        create.putExtra("invoice", newInvoice);
+                        startActivity(create);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+
+
+        });
 
     }
 }
