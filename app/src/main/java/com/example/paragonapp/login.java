@@ -35,7 +35,7 @@ public class login extends AppCompatActivity {
 
         User savedUser = new User();
         loadUser(savedUser);
-        System.out.println(savedUser.getUsername());
+        System.out.println("Saved User: " + savedUser.getUsername());
 
         if (savedUser.getUsername() != "null") {
             loadUsername = (EditText) findViewById(R.id.usernameEdit);
