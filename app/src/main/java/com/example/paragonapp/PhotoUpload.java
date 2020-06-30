@@ -5,7 +5,7 @@ public class PhotoUpload {
     private String weeklyImageUrl;
 
 
-    public PhotoUpload() {
+    public PhotoUpload(String trim) {
         // empty constructor needed
     }
 
