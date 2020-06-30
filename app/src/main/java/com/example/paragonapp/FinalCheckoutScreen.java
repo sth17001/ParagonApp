@@ -152,7 +152,7 @@ public class FinalCheckoutScreen extends AppCompatActivity {
             dialog.show();
             final String message = "=======================" + "\n" + tempName + ",\n\nPlease review the details below.\n\n" +
                     " \nTotal Before Tax: $" + totalBD.toString() + "\nTax Amount: $" + taxAmountBD.toString() + "\n=======================" + "\n\nTotal: $" + finalTotalBD.toString()
-                    + "\n\nYour order number is: #MMH-" + newInvoice + ".\n\nYour order will be ready for pickup in 8 minutes.\n\nThank you for choosing the Paragon Cafe.";
+                    + "\n\nYour order number is: #MMH-" + newInvoice + ".\n\nYour order will be ready for pickup in 8 minutes.\n\nThank you for choosing the Paragon Cafe.\n\n";
             Thread sender = new Thread(new Runnable() {
                 @Override
                 public void run() {
