@@ -4,13 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -35,21 +38,21 @@ import java.util.List;
 import java.util.Map;
 
 public class OrderOnline extends AppCompatActivity {
-    List emptyList = new ArrayList<String>();
     ListView cartItemsL, grilledItemsL, friedItemsL, specialItemsL;
     ImageButton grilledImage, friedImage, specialImage;
     ImageView checkoutLogo;
     LinearLayout checkoutLayout, menuLayout, cartLayout;
     Button menuBtn, cartBtn, checkoutBtn, payBtn;
     ImageButton grilledIbtn, friedIbtn, specialIbtn;
+    CheckBox saveOrder, loadOrder;
     DatabaseReference grilledDatabase, friedDatabase, specialDatabase;
     HashMap<String, String> grillAndPrice = new HashMap<>();
     HashMap<String, String> friedAndPrice = new HashMap<>();
     List cart = new ArrayList<String>();
+    List tempCart = new ArrayList<String>();
     Boolean isMenu;
     BigDecimal total;
     TextView textTotal;
-    int count = 10;
 
     HashMap<String, String> specialAndPrice = new HashMap<>();
     List<HashMap<String, String>> listOfGrilledItems = new ArrayList<>();
@@ -87,6 +90,9 @@ public class OrderOnline extends AppCompatActivity {
         friedIbtn = (ImageButton) findViewById(R.id.friedBTN);
         specialIbtn = (ImageButton) findViewById(R.id.specialBTN);
         checkoutLogo = findViewById(R.id.checkoutLogo);
+
+        saveOrder = findViewById(R.id.saveOrder);
+        loadOrder = findViewById(R.id.loadOrder);
 
 
         textTotal = findViewById(R.id.total);
@@ -181,8 +187,6 @@ public class OrderOnline extends AppCompatActivity {
 
         });
 
-
-        //TODO change this
         for (Integer i = 0; i < 7; i++) {
             cart.add("   ");
         }
@@ -332,12 +336,65 @@ public class OrderOnline extends AppCompatActivity {
                 else if (cvc.getText().toString().length() < 3) {
                     Toast.makeText(OrderOnline.this, "Please enter in a valid cvc number", Toast.LENGTH_LONG).show();
                 }
-                
+
                 else {
+                    if (saveOrder.isChecked()) {
+                        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(OrderOnline.this);
+                        SharedPreferences.Editor mEdit1 = sp.edit();
+                        /* sKey is an array */
+                        mEdit1.putInt("Status_size", cart.size());
+
+                        for(int i=0;i<cart.size();i++)
+                        {
+                            mEdit1.remove("Status_" + i);
+                            mEdit1.putString("Status_" + i, cart.get(i).toString());
+                        }
+
+                         mEdit1.commit();
+                    }
                     create.putExtra("name", name.getText().toString());
                     create.putExtra("total", total.toString());
                     create.putExtra("order", (ArrayList<String>) cart);
                     startActivity(create);
+                }
+            }
+        });
+
+        loadOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (loadOrder.isChecked()) {
+                    SharedPreferences mSharedPreference1 =   PreferenceManager.getDefaultSharedPreferences(OrderOnline.this);
+                    cart.clear();
+
+                    int size = mSharedPreference1.getInt("Status_size", 0);
+
+                    for(int i=0;i<size;i++)
+                    {
+                        cart.add(mSharedPreference1.getString("Status_" + i, null));
+                        String item = cart.get(i).toString();
+                        total = total.add(new BigDecimal(grillAndPrice.get(item)));
+                        textTotal.setText(total.toString());
+
+                    }
+                    if (10 > cart.size())
+                    {
+                        for (int i = 0; i<10-cart.size(); i++) {
+                        cart.add("   ");
+                        }
+                    }
+                    final ArrayAdapter adapter = new ArrayAdapter(OrderOnline.this, android.R.layout.simple_list_item_2, android.R.id.text1, cart);
+                    cartItemsL.setAdapter(adapter);
+                }
+                else {
+                    cart.clear();
+                    for (Integer i = 0; i<7; i++) {
+                        cart.add("   ");
+                    }
+                    final ArrayAdapter adapter = new ArrayAdapter(OrderOnline.this, android.R.layout.simple_list_item_2, android.R.id.text1, cart);
+                    cartItemsL.setAdapter(adapter);
+                    total = new BigDecimal("0");
+                    textTotal.setText("0");
                 }
             }
         });
