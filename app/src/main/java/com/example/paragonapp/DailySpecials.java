@@ -1,31 +1,55 @@
 package com.example.paragonapp;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Instrumentation;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.chrisbanes.photoview.PhotoView;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+
 
 public class DailySpecials extends AppCompatActivity {
-Button dailyButton,weeklyButton,editDailySpecial,editWeeklySpecial;
-PhotoView daily,paragonweekly;
+    //BUTTONS
+Button dailyButton;
+Button weeklyButton;
+Button editDailySpecial;
+Button editWeeklySpecial;
+Button uploadButton;
 
+
+    //PHOTOVIEW is similar to image but is able to zoom
+PhotoView daily;
+PhotoView paragonweekly;
+    private ImageView mImageView;
+private ProgressBar weeklyProgressBar;
 private Uri weeklyImageUrl;
 private StorageReference weeklyStorageRef;
 private DatabaseReference weeklyDataBaseRef;
+private EditText weeklyEditTextFileName;
+private StorageTask mUploadTask;
 
-private static final int GalleryPic = 1;
+private static final int PICK_IMAGE_REQUEST  = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +61,6 @@ private static final int GalleryPic = 1;
         weeklyStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         weeklyDataBaseRef = FirebaseDatabase.getInstance().getReference("uploads");
 
-
         //Buttons for Displaying Daily/Weekly specials
         dailyButton = (Button)findViewById(R.id.dailyButton);
         weeklyButton = (Button)findViewById(R.id.weeklyButton);
@@ -45,17 +68,9 @@ private static final int GalleryPic = 1;
         // Buttons for Editing Daily/Weekly Specials
         editDailySpecial = (Button)findViewById(R.id.editDailySpecial);
         editWeeklySpecial = (Button)findViewById(R.id.editWeeklySpecial);
+        uploadButton = (Button) findViewById(R.id.uploadButton);
 
-        editWeeklySpecial.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
 
-            }
-        });
 
         // Images for daily and weekly specials
         daily = (PhotoView) findViewById(R.id.dailyPic);
@@ -68,6 +83,7 @@ private static final int GalleryPic = 1;
                 // Code here executes on main thread after user presses button
             }
         });
+        //
         weeklyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -76,40 +92,101 @@ private static final int GalleryPic = 1;
                 // Code here executes on main thread after user presses button
             }
         });
+        // Button for selecting the image for the Weekly special
+        editWeeklySpecial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                openFileChooser();
+                //uploadFile();  add this in later
+
+            }
+        });
+
+        // Button for uploading the Weekly Special image
+        uploadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mUploadTask != null && mUploadTask.isInProgress()) {
+                    Toast.makeText(DailySpecials.this, "Upload in progress", Toast.LENGTH_SHORT).show();
+                } else {
+                    uploadFile();
+                }
+
+            }
+        });
 
     }
 
-
-    public static final int PICK_IMAGE = 1;
+    //When this is called then it allows the user to select a image
+    private void openFileChooser(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE) {
-            Uri imageUri = data.getData();
-            paragonweekly.setImageURI(imageUri);
-
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null){
+            //weeklyImageUrl = data.getData();
+            // Picasso.with(this).load(weeklyImageUrl).into(paragonweekly);
+            //Picasso.get().load(weeklyImageUrl).into(mImageView);
+            weeklyImageUrl = data.getData();
+            paragonweekly.setImageURI(weeklyImageUrl);
+            Picasso.with(this).load(weeklyImageUrl).into(paragonweekly);
         }
     }
 
+    private String getFileExtension(Uri uri){
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
 
+    // Sends the File(image) that was chosen to send to fireBase
+    private void uploadFile(){
+        if(weeklyImageUrl != null){
+            StorageReference fileReference = weeklyStorageRef.child(System.currentTimeMillis()
+                    + "." + getFileExtension(weeklyImageUrl));
 
+            mUploadTask = fileReference.putFile(weeklyImageUrl)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    weeklyProgressBar.setProgress(0);
+                                }
+                            }, 500);
 
-    /*@Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+                            Toast.makeText(DailySpecials.this, "Upload succesful", Toast.LENGTH_LONG).show();
+                            PhotoUpload upload = new PhotoUpload(weeklyEditTextFileName.getText().toString().trim(),
+                                    taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
+                            String weeklyUploadId = weeklyDataBaseRef.push().getKey();
+                            weeklyDataBaseRef.child(weeklyUploadId).setValue(upload);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(DailySpecials.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 
-        if(requestCode == GalleryPic && resultCode == RESULT_OK && data !=null) {
-
-            Uri ImageUri = data.getData();
-
-        }
-        //weeklyButton.ActivityResult result = weeklyButton.getActivityResult(data);
-
-        if(requestCode == RESULT_OK) {
-            //Uri resultUri = result.getUri();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                            weeklyProgressBar.setProgress((int) progress);
+                        }
+                    });
+        } else{
+            Toast.makeText(this, "No File Selected", Toast.LENGTH_SHORT).show();
         }
     }
-    */
 
 }
