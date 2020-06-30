@@ -1,13 +1,12 @@
 package com.example.paragonapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class InvoiceScreen extends AppCompatActivity {
     TextView invoice;
@@ -22,7 +21,7 @@ public class InvoiceScreen extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            invoiceNum = "#MMM-"+extras.getString("invoice");
+            invoiceNum = "#MMH-"+extras.getString("invoice");
         }
 
         invoice.setText("Your order number is: " + invoiceNum+".\n\nYour order will be ready for pickup in 8 minutes.\n\nThank you for choosing the Paragon Cafe.");
@@ -36,5 +35,10 @@ public class InvoiceScreen extends AppCompatActivity {
                 startActivity(create);
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+
+
     }
 }

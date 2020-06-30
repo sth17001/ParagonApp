@@ -1,15 +1,17 @@
 package com.example.paragonapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +30,7 @@ public class FinalCheckoutScreen extends AppCompatActivity {
     BigDecimal totalBD, taxAmountBD, finalTotalBD;
     Button placeOrder;
     List cartOrder = new ArrayList<String>();
+    private View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,8 @@ public class FinalCheckoutScreen extends AppCompatActivity {
             total = extras.getString("total");
             cartOrder =  extras.getStringArrayList("order");
         }
+
+
 
         totalView = findViewById(R.id.finalTotal);
 
@@ -76,7 +81,7 @@ public class FinalCheckoutScreen extends AppCompatActivity {
         tempName = tempName.substring(0, tempName.length() - 1);
 
         totalView.setText("======================="+"\n" + tempName + ",\n\nPlease review the details below.\n\n" +
-                " \nTotal Before Tax: $" + totalBD.toString()+"\nTax Amount: $"+ taxAmountBD.toString() + "\n======================="+ "\n\nTotal: $"+ finalTotalBD.toString());
+                " \nTotal Before Tax: $" + totalBD.toString()+"\nTax Amount: $"+ taxAmountBD.toString() + "\n======================="+ "\n\nTotal: $"+ finalTotalBD.toString() );
 
         FirebaseDatabase database2 = FirebaseDatabase.getInstance();
         final DatabaseReference table_invoice = database2.getReference("Orders");
@@ -110,8 +115,8 @@ public class FinalCheckoutScreen extends AppCompatActivity {
         placeOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                table_order.addListenerForSingleValueEvent(new ValueEventListener() {
+                    sendMessage();
+                    table_order.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         Order order = new Order(cartOrder, tempName, totalBD.toString(), finalTotalBD.toString(), taxAmountBD.toString());
@@ -132,5 +137,38 @@ public class FinalCheckoutScreen extends AppCompatActivity {
 
         });
 
+
+    }
+    private void sendMessage() {
+        EditText emailT = findViewById(R.id.email);
+        final String email = emailT.getText().toString();
+        if (emailT.getText().toString().equals("")) {
+            Toast.makeText(FinalCheckoutScreen.this, "Please enter an email address", Toast.LENGTH_LONG).show();
+        }
+        else {
+            final ProgressDialog dialog = new ProgressDialog(FinalCheckoutScreen.this);
+            dialog.setTitle("Sending Email");
+            dialog.setMessage("Please wait");
+            dialog.show();
+            final String message = "=======================" + "\n" + tempName + ",\n\nPlease review the details below.\n\n" +
+                    " \nTotal Before Tax: $" + totalBD.toString() + "\nTax Amount: $" + taxAmountBD.toString() + "\n=======================" + "\n\nTotal: $" + finalTotalBD.toString()
+                    + "\n\nYour order number is: #MMH-" + newInvoice + ".\n\nYour order will be ready for pickup in 8 minutes.\n\nThank you for choosing the Paragon Cafe.";
+            Thread sender = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        GMailSender sender = new GMailSender("noReplyMMHParagon@gmail.com", "Targhee1");
+                        sender.sendMail("Your paragon order details",
+                                message,
+                                "noReplyMMHParagon@gmail.com",
+                                email);
+                        dialog.dismiss();
+                    } catch (Exception e) {
+                        Log.e("mylog", "Error: " + e.getMessage());
+                    }
+                }
+            });
+            sender.start();
+        }
     }
 }
