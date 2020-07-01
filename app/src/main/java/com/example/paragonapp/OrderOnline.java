@@ -362,17 +362,27 @@ public class OrderOnline extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (loadOrder.isChecked()) {
-                    SharedPreferences mSharedPreference1 =   PreferenceManager.getDefaultSharedPreferences(OrderOnline.this);
+                    SharedPreferences mSharedPreference1 = PreferenceManager.getDefaultSharedPreferences(OrderOnline.this);
                     cart.clear();
 
                     int size = mSharedPreference1.getInt("Status_size", 0);
-
                     for(int i=0;i<size;i++)
                     {
                         cart.add(mSharedPreference1.getString("Status_" + i, null));
                         String item = cart.get(i).toString();
-                        total = total.add(new BigDecimal(grillAndPrice.get(item)));
-                        textTotal.setText(total.toString());
+                        if (grillAndPrice.containsKey(item)) {
+                            total = total.add(new BigDecimal(grillAndPrice.get(item)));
+                            textTotal.setText(total.toString());
+                        }
+                        if (friedAndPrice.containsKey(item)) {
+                            total = total.add(new BigDecimal(friedAndPrice.get(item)));
+                            textTotal.setText(total.toString());
+                        }
+                        if (specialAndPrice.containsKey(item)) {
+                            total = total.add(new BigDecimal(specialAndPrice.get(item)));
+                            textTotal.setText(total.toString());
+                        }
+
 
                     }
                     if (10 > cart.size())
