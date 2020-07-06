@@ -10,6 +10,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ Button uploadButton;
 
     //PHOTOVIEW is similar to image but is able to zoom
 ImageView dailyImage;
+LinearLayout dailyLayout;
 PhotoView paragonweekly;
 private ImageView mImageView;
 private ProgressBar weeklyProgressBar;
@@ -70,7 +72,8 @@ private static final int PICK_IMAGE_REQUEST  = 1;
         editWeeklySpecial = (Button)findViewById(R.id.editWeeklySpecial);
         uploadButton = (Button) findViewById(R.id.uploadButton);
 
-
+        //LinearLayout
+        dailyLayout = findViewById(R.id.dailyLayout);
 
         // Images for daily and weekly specials
         dailyImage = (ImageView) findViewById(R.id.dailyPic);
@@ -79,7 +82,7 @@ private static final int PICK_IMAGE_REQUEST  = 1;
         // Sets the Daily Special Photo visible and Weekly to Gone to show the Daily Special (Current)
         dailyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            dailyImage.setVisibility(View.VISIBLE);
+            dailyLayout.setVisibility(View.VISIBLE);
             paragonweekly.setVisibility(View.GONE);
                 // Code here executes on main thread after user presses button
             }
@@ -88,7 +91,7 @@ private static final int PICK_IMAGE_REQUEST  = 1;
         weeklyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                dailyImage.setVisibility(View.GONE);
+                dailyLayout.setVisibility(View.GONE);
                 paragonweekly.setVisibility(View.VISIBLE);
                 // Code here executes on main thread after user presses button
             }
