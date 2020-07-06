@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/darkbacon"
+    android:background="#931521"
     tools:context=".DailySpecials">
 
 
@@ -24,7 +24,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center|bottom"
 
-            android:visibility="gone"
+            android:visibility="visible"
             android:src="@drawable/paragonweekly"/>
 
         <com.github.chrisbanes.photoview.PhotoView
@@ -32,21 +32,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center|bottom"
-            android:visibility="visible"
+            android:visibility="gone"
             android:src="@drawable/daily"/>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/editDailySpecial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#00FFFFFF"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:text="Edit Daily Special"
-        android:textAlignment="center"
-        android:textColor="#FFFF"
-        android:visibility="visible"/>
+
 
     <Button
         android:id="@+id/uploadButton"
@@ -60,39 +50,121 @@
         android:backgroundTint="#00FFFFFF"
         />
 
-    <Button
-        android:id="@+id/editWeeklySpecial"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#00FFFFFF"
-        android:layout_alignParentRight="true"
+        android:id="@+id/SpecialHeader"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:src="#931521" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#931521"
+            android:backgroundTint="#931521"
+            android:fontFamily="serif"
+            android:text="Daily Specials"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold|italic"
+     />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#931521"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/dailyButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_weight="1"
+                android:backgroundTint="#00FFFFFF"
+                android:fontFamily="serif"
+                android:text="Current Special"
+                android:textAlignment="center"
+                android:textColor="#FFFF"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/weeklyButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_weight="1"
+                android:backgroundTint="#00FFFFFF"
+                android:fontFamily="serif"
+                android:text="upcoming specials"
+                android:textAlignment="center"
+                android:textColor="#FFFF"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+
+            ></LinearLayout>
+
+            ></LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="#931521"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true">
+
+            <Button
+                android:id="@+id/editDailySpecial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_weight="1"
+                android:backgroundTint="#00FFFFFF"
+                android:fontFamily="serif"
+                android:text="Edit Daily Special"
+                android:textAlignment="center"
+                android:textColor="#FFFF"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/editWeeklySpecial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_weight="1"
+                android:backgroundTint="#00FFFFFF"
+                android:fontFamily="serif"
+                android:text="Edit Weekly Special"
+                android:textAlignment="center"
+                android:textColor="#FFFF"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+
+                ></LinearLayout>
+
+
+    <ImageView
+        android:layout_width="378dp"
+        android:layout_height="58dp"
+        android:src="@drawable/whitetransparagon"
+        android:layout_centerInParent="true"
         android:layout_alignParentBottom="true"
-        android:text="Edit Weekly Special"
-        android:textAlignment="center"
-        android:textColor="#FFFF"
-        android:visibility="visible"/>
-    <Button
-        android:id="@+id/dailyButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#00FFFFFF"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="Current Special"
-        android:textAlignment="center"
-        android:textColor="#FFFF"
-        android:visibility="visible"/>
-    <Button
-        android:id="@+id/weeklyButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#00FFFFFF"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="Specials of the Week"
-        android:textAlignment="center"
-        android:textColor="#FFFF"
-        android:visibility="visible"/>
+        android:layout_marginBottom="17dp"/>
     
 
 </RelativeLayout>

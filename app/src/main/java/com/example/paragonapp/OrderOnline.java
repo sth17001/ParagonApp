@@ -206,8 +206,6 @@ public class OrderOnline extends AppCompatActivity {
             }
         });
 
-
-
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -293,7 +291,6 @@ public class OrderOnline extends AppCompatActivity {
         payBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 Intent create = new Intent(OrderOnline.this, FinalCheckoutScreen.class);
                 EditText name = findViewById(R.id.name);
