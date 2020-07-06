@@ -37,7 +37,7 @@ Button weeklyButton;
 Button editDailySpecial;
 Button editWeeklySpecial;
 Button uploadButton;
-
+Boolean isAdmin;
 
     //PHOTOVIEW is similar to image but is able to zoom
 ImageView dailyImage;
@@ -57,6 +57,11 @@ private static final int PICK_IMAGE_REQUEST  = 1;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_specials);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            isAdmin = extras.getBoolean("isAdmin");
+        }
 
 
         //Uploading for fireBase
@@ -163,7 +168,6 @@ private static final int PICK_IMAGE_REQUEST  = 1;
                 Toast.makeText(this, "No File Selected", Toast.LENGTH_SHORT).show();
         }
     }
-
 
     //When this is called then it allows the user to select a image
     private void openFileChooser(){

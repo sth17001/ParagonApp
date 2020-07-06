@@ -15,10 +15,14 @@ public class loggedIn extends AppCompatActivity {
     ImageView paragonLogo;
     String username;
     String userType;
+    Boolean isAdmin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logged_in);
+
+        isAdmin = false;
 
         btnOrderOnline = (ImageButton)findViewById(R.id.orderOnline);
         btnDailySpecial = (ImageButton)findViewById(R.id.dailySpecials);
@@ -37,6 +41,7 @@ public class loggedIn extends AppCompatActivity {
 
         if (userType.equals("admin")) {
             System.out.println("MANAGE ACCESS GRANTED");
+            isAdmin = true;
             paragonLogo.setVisibility(View.GONE);
             managerbtn.setVisibility(View.VISIBLE);
         }
@@ -53,6 +58,7 @@ public class loggedIn extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent create = new Intent(loggedIn.this, DailySpecials.class);
+                create.putExtra("isAdmin", isAdmin);
                 startActivity(create);
             }
         });
