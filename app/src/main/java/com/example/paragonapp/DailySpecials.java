@@ -2,6 +2,7 @@ package com.example.paragonapp;
 
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.icu.text.SymbolTable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,7 +27,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
+
 
 
 public class DailySpecials extends AppCompatActivity {
@@ -41,7 +42,7 @@ Button uploadButton;
     //PHOTOVIEW is similar to image but is able to zoom
 PhotoView daily;
 PhotoView paragonweekly;
-    private ImageView mImageView;
+private ImageView mImageView;
 private ProgressBar weeklyProgressBar;
 private Uri weeklyImageUrl;
 private StorageReference weeklyStorageRef;
@@ -75,6 +76,7 @@ private static final int PICK_IMAGE_REQUEST  = 1;
         // Images for daily and weekly specials
         daily = (PhotoView) findViewById(R.id.dailyPic);
         paragonweekly = (PhotoView) findViewById(R.id.weeklyPic);
+
         // Sets the Daily Special Photo visible and Weekly to Gone to show the Daily Special (Current)
         dailyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -107,16 +109,48 @@ private static final int PICK_IMAGE_REQUEST  = 1;
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mUploadTask != null && mUploadTask.isInProgress()) {
-                    Toast.makeText(DailySpecials.this, "Upload in progress", Toast.LENGTH_SHORT).show();
-                } else {
-                    uploadFile();
+                if(mUploadTask != null && mUploadTask.isInProgress()){
+                    Toast.makeText(DailySpecials.this,"Uploading Image",Toast.LENGTH_LONG).show();
+                } else{
+                    Fileuploader();
                 }
 
             }
         });
 
     }
+
+    private String getExtension(Uri uri){
+
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(cR.getType(uri));
+    }
+
+    private void Fileuploader() {
+        if(weeklyImageUrl != null) {
+            StorageReference Ref = weeklyStorageRef.child(System.currentTimeMillis() + "." + getExtension(weeklyImageUrl));
+            mUploadTask = Ref.putFile(weeklyImageUrl)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            // Get a URL to the uploaded content
+                            // Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                            Toast.makeText(DailySpecials.this, "Upload Complete", Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle unsuccessful uploads
+                            // ...
+                        }
+                    });
+        }else{
+                Toast.makeText(this, "No File Selected", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     //When this is called then it allows the user to select a image
     private void openFileChooser(){
@@ -130,12 +164,9 @@ private static final int PICK_IMAGE_REQUEST  = 1;
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null){
-            //weeklyImageUrl = data.getData();
-            // Picasso.with(this).load(weeklyImageUrl).into(paragonweekly);
-            //Picasso.get().load(weeklyImageUrl).into(mImageView);
-            weeklyImageUrl = data.getData();
-            paragonweekly.setImageURI(weeklyImageUrl);
-            Picasso.with(this).load(weeklyImageUrl).into(paragonweekly);
+            weeklyImageUrl = data.getData(); // Get the data
+            paragonweekly.setImageURI(weeklyImageUrl); // Set the image to the data that was gotten
+           // Picasso.with(this).load(weeklyImageUrl).into(paragonweekly);
         }
     }
 
@@ -146,7 +177,8 @@ private static final int PICK_IMAGE_REQUEST  = 1;
     }
 
     // Sends the File(image) that was chosen to send to fireBase
-    private void uploadFile(){
+    private void uploadFile()
+    {
         if(weeklyImageUrl != null){
             StorageReference fileReference = weeklyStorageRef.child(System.currentTimeMillis()
                     + "." + getFileExtension(weeklyImageUrl));
