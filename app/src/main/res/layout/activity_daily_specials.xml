@@ -23,32 +23,29 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center|bottom"
+            android:layout_margin="8dp"
+            android:visibility="gone"
 
-            android:visibility="visible"
             android:src="@drawable/paragonweekly"/>
 
-        <com.github.chrisbanes.photoview.PhotoView
-            android:id="@+id/dailyPic"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center|bottom"
-            android:visibility="gone"
-            android:src="@drawable/daily"/>
+
+
     </LinearLayout>
-
-
 
     <Button
         android:id="@+id/uploadButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upload"
-
-
         android:layout_centerInParent="true"
-        android:textColor="#FFFF"
+
+        android:visibility="gone"
         android:backgroundTint="#00FFFFFF"
-        />
+        android:fontFamily="serif"
+        android:text="Upload"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textStyle="bold" />
 
 
     <LinearLayout
@@ -57,7 +54,7 @@
         android:id="@+id/SpecialHeader"
         android:orientation="vertical">
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="10dp"
             android:src="#931521" />
 
@@ -111,6 +108,31 @@
 
 
             ></LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="90dp"
+            android:orientation="vertical"
+            android:background="@android:color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="serif"
+                android:text="French Fries"
+                android:textColor="#000000"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/dailyPic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/daily"
+                android:visibility="visible"
+                app:srcCompat="@drawable/fries" />
+
+        ></LinearLayout>
 
             ></LinearLayout>
 

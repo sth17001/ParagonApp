@@ -2,7 +2,6 @@ package com.example.paragonapp;
 
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.icu.text.SymbolTable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -40,7 +39,7 @@ Button uploadButton;
 
 
     //PHOTOVIEW is similar to image but is able to zoom
-PhotoView daily;
+ImageView dailyImage;
 PhotoView paragonweekly;
 private ImageView mImageView;
 private ProgressBar weeklyProgressBar;
@@ -74,13 +73,13 @@ private static final int PICK_IMAGE_REQUEST  = 1;
 
 
         // Images for daily and weekly specials
-        daily = (PhotoView) findViewById(R.id.dailyPic);
+        dailyImage = (ImageView) findViewById(R.id.dailyPic);
         paragonweekly = (PhotoView) findViewById(R.id.weeklyPic);
 
         // Sets the Daily Special Photo visible and Weekly to Gone to show the Daily Special (Current)
         dailyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            daily.setVisibility(View.VISIBLE);
+            dailyImage.setVisibility(View.VISIBLE);
             paragonweekly.setVisibility(View.GONE);
                 // Code here executes on main thread after user presses button
             }
@@ -89,7 +88,7 @@ private static final int PICK_IMAGE_REQUEST  = 1;
         weeklyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                daily.setVisibility(View.GONE);
+                dailyImage.setVisibility(View.GONE);
                 paragonweekly.setVisibility(View.VISIBLE);
                 // Code here executes on main thread after user presses button
             }
