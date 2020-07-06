@@ -68,7 +68,18 @@ private static final int PICK_IMAGE_REQUEST  = 1;
         // Buttons for Editing Daily/Weekly Specials
         editDailySpecial = (Button)findViewById(R.id.editDailySpecial);
         editWeeklySpecial = (Button)findViewById(R.id.editWeeklySpecial);
+
         uploadButton = (Button) findViewById(R.id.uploadButton);
+        if(login.userType == "admin"){
+            uploadButton.setVisibility(View.VISIBLE);
+            editWeeklySpecial.setVisibility(View.VISIBLE);
+            editDailySpecial.setVisibility(View.VISIBLE);
+        } else {
+            uploadButton.setVisibility(View.GONE);
+            editWeeklySpecial.setVisibility(View.GONE);
+            editDailySpecial.setVisibility(View.GONE);
+        }
+
 
 
 
@@ -108,20 +119,13 @@ private static final int PICK_IMAGE_REQUEST  = 1;
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(true == true){
-                    uploadButton.setVisibility(View.VISIBLE);
-                    if(mUploadTask != null && mUploadTask.isInProgress()){
-                        Toast.makeText(DailySpecials.this,"Uploading Image",Toast.LENGTH_LONG).show();
-                    } else{
-                        Fileuploader();
-                    }
+                if (mUploadTask != null && mUploadTask.isInProgress()) {
+                    Toast.makeText(DailySpecials.this, "Uploading Image", Toast.LENGTH_LONG).show();
+                } else {
+                    Fileuploader();
                 }
-                else {
-                    uploadButton.setVisibility(View.GONE);
-                }
-
-
             }
+
         });
 
     }

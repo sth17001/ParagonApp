@@ -26,7 +26,7 @@ public class login extends AppCompatActivity {
     DatabaseReference userRef;
     ArrayList<User> userArrayList = new ArrayList<User>();
     Boolean rememberChecked;
-    String userType;
+    static String userType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
