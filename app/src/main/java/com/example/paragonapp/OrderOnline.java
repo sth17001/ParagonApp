@@ -1,12 +1,8 @@
 package com.example.paragonapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +19,9 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +30,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -364,17 +362,27 @@ public class OrderOnline extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (loadOrder.isChecked()) {
-                    SharedPreferences mSharedPreference1 =   PreferenceManager.getDefaultSharedPreferences(OrderOnline.this);
+                    SharedPreferences mSharedPreference1 = PreferenceManager.getDefaultSharedPreferences(OrderOnline.this);
                     cart.clear();
 
                     int size = mSharedPreference1.getInt("Status_size", 0);
-
                     for(int i=0;i<size;i++)
                     {
                         cart.add(mSharedPreference1.getString("Status_" + i, null));
                         String item = cart.get(i).toString();
-                        total = total.add(new BigDecimal(grillAndPrice.get(item)));
-                        textTotal.setText(total.toString());
+                        if (grillAndPrice.containsKey(item)) {
+                            total = total.add(new BigDecimal(grillAndPrice.get(item)));
+                            textTotal.setText(total.toString());
+                        }
+                        if (friedAndPrice.containsKey(item)) {
+                            total = total.add(new BigDecimal(friedAndPrice.get(item)));
+                            textTotal.setText(total.toString());
+                        }
+                        if (specialAndPrice.containsKey(item)) {
+                            total = total.add(new BigDecimal(specialAndPrice.get(item)));
+                            textTotal.setText(total.toString());
+                        }
+
 
                     }
                     if (10 > cart.size())
@@ -388,13 +396,13 @@ public class OrderOnline extends AppCompatActivity {
                 }
                 else {
                     cart.clear();
-                    for (Integer i = 0; i<7; i++) {
+                    for (Integer i = 0; i<8; i++) {
                         cart.add("   ");
                     }
                     final ArrayAdapter adapter = new ArrayAdapter(OrderOnline.this, android.R.layout.simple_list_item_2, android.R.id.text1, cart);
                     cartItemsL.setAdapter(adapter);
-                    total = new BigDecimal("0");
-                    textTotal.setText("0");
+                    total = new BigDecimal("0.00");
+                    textTotal.setText(total.toString());
                 }
             }
         });

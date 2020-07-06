@@ -1,7 +1,5 @@
 package com.example.paragonapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +7,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.google.firebase.database.core.view.Change;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class loggedIn extends AppCompatActivity {
     ImageButton btnOrderOnline, btnDailySpecial;
@@ -67,6 +65,14 @@ public class loggedIn extends AppCompatActivity {
             }
         });
 
+
+    }
+    @Override
+    public void onBackPressed() {
+
+
+        Intent create = new Intent(loggedIn.this, Home.class);
+        startActivity(create);
 
     }
 }
