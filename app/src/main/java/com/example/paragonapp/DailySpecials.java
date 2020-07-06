@@ -40,7 +40,7 @@ Button uploadButton;
 Boolean isAdmin;
 
     //PHOTOVIEW is similar to image but is able to zoom
-ImageView dailyImage;
+ImageView dailyImage, logoImage;
 LinearLayout dailyLayout;
 PhotoView paragonweekly;
 private ImageView mImageView;
@@ -68,6 +68,8 @@ private static final int PICK_IMAGE_REQUEST  = 1;
         weeklyStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         weeklyDataBaseRef = FirebaseDatabase.getInstance().getReference("uploads");
 
+        logoImage = findViewById(R.id.logo);
+
         //Buttons for Displaying Daily/Weekly specials
         dailyButton = (Button)findViewById(R.id.dailyButton);
         weeklyButton = (Button)findViewById(R.id.weeklyButton);
@@ -79,8 +81,9 @@ private static final int PICK_IMAGE_REQUEST  = 1;
         uploadButton = (Button) findViewById(R.id.uploadButton);
         if(isAdmin == true){
             uploadButton.setVisibility(View.VISIBLE);
-            editWeeklySpecial.setVisibility(View.VISIBLE);
+            editWeeklySpecial.setVisibility(View.GONE);
             editDailySpecial.setVisibility(View.VISIBLE);
+            logoImage.setVisibility(View.GONE);
         } else {
             uploadButton.setVisibility(View.GONE);
             editWeeklySpecial.setVisibility(View.GONE);
@@ -100,6 +103,17 @@ private static final int PICK_IMAGE_REQUEST  = 1;
             public void onClick(View v) {
             dailyLayout.setVisibility(View.VISIBLE);
             paragonweekly.setVisibility(View.GONE);
+                if(isAdmin == true){
+                    uploadButton.setVisibility(View.VISIBLE);
+                    editWeeklySpecial.setVisibility(View.GONE);
+                    editDailySpecial.setVisibility(View.VISIBLE);
+                    logoImage.setVisibility(View.GONE);
+                } else {
+                    uploadButton.setVisibility(View.GONE);
+                    editWeeklySpecial.setVisibility(View.GONE);
+                    editDailySpecial.setVisibility(View.GONE);
+                    logoImage.setVisibility(View.VISIBLE);
+                }
                 // Code here executes on main thread after user presses button
             }
         });
@@ -109,6 +123,17 @@ private static final int PICK_IMAGE_REQUEST  = 1;
 
                 dailyLayout.setVisibility(View.GONE);
                 paragonweekly.setVisibility(View.VISIBLE);
+                if(isAdmin == true){
+                    uploadButton.setVisibility(View.VISIBLE);
+                    editWeeklySpecial.setVisibility(View.VISIBLE);
+                    editDailySpecial.setVisibility(View.GONE);
+                    logoImage.setVisibility(View.GONE);
+                } else {
+                    uploadButton.setVisibility(View.GONE);
+                    editWeeklySpecial.setVisibility(View.GONE);
+                    editDailySpecial.setVisibility(View.GONE);
+                    logoImage.setVisibility(View.VISIBLE);
+                }
                 // Code here executes on main thread after user presses button
             }
         });
