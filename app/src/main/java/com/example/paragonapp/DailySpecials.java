@@ -108,11 +108,18 @@ private static final int PICK_IMAGE_REQUEST  = 1;
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mUploadTask != null && mUploadTask.isInProgress()){
-                    Toast.makeText(DailySpecials.this,"Uploading Image",Toast.LENGTH_LONG).show();
-                } else{
-                    Fileuploader();
+                if(true == true){
+                    uploadButton.setVisibility(View.VISIBLE);
+                    if(mUploadTask != null && mUploadTask.isInProgress()){
+                        Toast.makeText(DailySpecials.this,"Uploading Image",Toast.LENGTH_LONG).show();
+                    } else{
+                        Fileuploader();
+                    }
                 }
+                else {
+                    uploadButton.setVisibility(View.GONE);
+                }
+
 
             }
         });
