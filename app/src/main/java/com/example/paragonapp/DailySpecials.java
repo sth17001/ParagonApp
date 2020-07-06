@@ -72,7 +72,7 @@ private static final int PICK_IMAGE_REQUEST  = 1;
         editWeeklySpecial = (Button)findViewById(R.id.editWeeklySpecial);
 
         uploadButton = (Button) findViewById(R.id.uploadButton);
-        if(login.userType == "admin"){
+        if(isAdmin == true){
             uploadButton.setVisibility(View.VISIBLE);
             editWeeklySpecial.setVisibility(View.VISIBLE);
             editDailySpecial.setVisibility(View.VISIBLE);
