@@ -3,6 +3,9 @@ package com.example.paragonapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,18 +20,42 @@ public class ChangeMenu extends AppCompatActivity {
     ArrayList<Item> friedArrayList = new ArrayList<Item>();
     ArrayList<Item> grilledArrayList = new ArrayList<Item>();
     ArrayList<Item> specialArrayList = new ArrayList<Item>();
+    ListView listView;
+    Button displayButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_menu);
+
+        displayButton = (Button) findViewById(R.id.displaybtn);
+        displayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayItems();
+            }
+        });
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         friedItemsRef = database.getReference("FriedItems");
         grilledItemsRef = database.getReference("GrilledItems");
         specialItemsRef = database.getReference("SpecialItems");
 
-        downloadItems();
+        download downloadThread = new download();
+        downloadThread.run();
 
+    }
+
+    public class download extends Thread {
+        public void run() {
+            downloadItems();
+        }
+    }
+
+    public void displayItems() {
+        System.out.println("ARRAYLIST SIZE - " + friedArrayList.size());
+        /*for (int i = 0; i < friedArrayList.size(); i++) {
+            System.out.println(friedArrayList.get(i).getName());
+        }*/
     }
 
     public void downloadItems() {
