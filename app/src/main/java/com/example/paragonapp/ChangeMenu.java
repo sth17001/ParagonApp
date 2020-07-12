@@ -25,6 +25,7 @@ public class ChangeMenu extends AppCompatActivity {
     Button friedlistbtn;
     Button grilledlistbtn;
     Button speciallistbtn;
+    Button backbtn;
     ListView friedList;
     ListView grilledList;
     ListView specialList;
@@ -37,6 +38,7 @@ public class ChangeMenu extends AppCompatActivity {
         friedlistbtn = (Button) findViewById(R.id.friedlistbtn);
         grilledlistbtn = (Button) findViewById(R.id.grilledlistbtn);
         speciallistbtn = (Button) findViewById(R.id.speciallistbtn);
+        backbtn = (Button) findViewById(R.id.backbtn);
 
         friedList = (ListView) findViewById(R.id.friedList);
         grilledList = (ListView) findViewById(R.id.grilledList);
@@ -49,6 +51,7 @@ public class ChangeMenu extends AppCompatActivity {
                 friedlistbtn.setVisibility(View.GONE);
                 grilledlistbtn.setVisibility(View.GONE);
                 speciallistbtn.setVisibility(View.GONE);
+                backbtn.setVisibility(View.VISIBLE);
                 friedList.setVisibility(View.VISIBLE);
                 grilledList.setVisibility(View.GONE);
                 specialList.setVisibility(View.GONE);
@@ -62,6 +65,7 @@ public class ChangeMenu extends AppCompatActivity {
                 friedlistbtn.setVisibility(View.GONE);
                 grilledlistbtn.setVisibility(View.GONE);
                 speciallistbtn.setVisibility(View.GONE);
+                backbtn.setVisibility(View.VISIBLE);
                 friedList.setVisibility(View.GONE);
                 grilledList.setVisibility(View.VISIBLE);
                 specialList.setVisibility(View.GONE);
@@ -75,9 +79,23 @@ public class ChangeMenu extends AppCompatActivity {
                 friedlistbtn.setVisibility(View.GONE);
                 grilledlistbtn.setVisibility(View.GONE);
                 speciallistbtn.setVisibility(View.GONE);
+                backbtn.setVisibility(View.VISIBLE);
                 friedList.setVisibility(View.GONE);
                 grilledList.setVisibility(View.GONE);
                 specialList.setVisibility(View.VISIBLE);
+            }
+        });
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                friedlistbtn.setVisibility(View.VISIBLE);
+                grilledlistbtn.setVisibility(View.VISIBLE);
+                speciallistbtn.setVisibility(View.VISIBLE);
+                backbtn.setVisibility(View.GONE);
+                friedList.setVisibility(View.GONE);
+                grilledList.setVisibility(View.GONE);
+                specialList.setVisibility(View.GONE);
             }
         });
 

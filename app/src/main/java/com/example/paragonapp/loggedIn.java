@@ -40,7 +40,7 @@ public class loggedIn extends AppCompatActivity {
         }
 
         if (userType.equals("admin")) {
-            System.out.println("MANAGE ACCESS GRANTED");
+            System.out.println("MANAGER ACCESS GRANTED");
             isAdmin = true;
             paragonLogo.setVisibility(View.GONE);
             managerbtn.setVisibility(View.VISIBLE);
