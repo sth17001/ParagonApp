@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#5A5A5A"
+    tools:context=".DeleteFried">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:layout_margin="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="19dp"
+            android:text="Remove Item"
+            android:textColor="#C4C8DC"
+            android:textSize="45dp"
+            android:textStyle="bold|italic" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#000000"/>
+
+        <ListView
+            android:id="@+id/deleteToolView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:clickable="true"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_margin="2dp"
+            android:background="#000000"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:text="Warning: tapping an item in this list will remove it from the database until you add it back."
+            android:textColor="#FFFFFF"
+            android:textSize="24dp"
+            android:textStyle="italic" />
+
+
+        ></LinearLayout>
+
+
+
+</RelativeLayout>
