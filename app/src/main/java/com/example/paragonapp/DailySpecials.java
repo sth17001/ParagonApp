@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -43,7 +44,7 @@ Button uploadButton;
 Boolean isAdmin;
 
     //PHOTOVIEW is similar to image but is able to zoom
-ImageView dailyImage, logoImage;
+ImageView dailyImage, logoImage, weeklyImage;
 LinearLayout dailyLayout;
 PhotoView paragonweekly;
 private ImageView mImageView;
@@ -65,11 +66,16 @@ private static final int PICK_IMAGE_REQUEST  = 1;
         if (extras != null) {
             isAdmin = extras.getBoolean("isAdmin");
         }
-
-
         //Uploading for fireBase
         weeklyStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         weeklyDataBaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+
+        weeklyImage = (ImageView) findViewById(R.id.weeklyPic);
+
+        Glide.with(DailySpecials.this)
+                .load("https://lh5.googleusercontent.com/K7h8DlaT_wqzGcTFucNludBe0KkilIvc92hrKv4ptFLIt8RpBslwMY8Lj6n2u3xzA3gBo_9DYACX74rOJvmoV7WS1-lbnZgcquFdJvZW3zD3HAbY_KCA24mOzGRoqu7cYCADuoY5")
+                .into(weeklyImage);
+
 
         logoImage = findViewById(R.id.logo);
 
