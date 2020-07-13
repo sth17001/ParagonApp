@@ -121,7 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="serif"
-                android:text="Add a title here."
+                android:text="French Toast"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
                 android:textSize="36sp"
@@ -132,7 +132,7 @@
                 android:id="@+id/dailyPic"
                 android:layout_width="wrap_content"
                 android:layout_height="275dp"
-                android:src="@drawable/daily"
+                android:src="@drawable/breakfast"
                 android:visibility="visible" />
 
             <TextView
@@ -140,7 +140,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="serif"
-                android:text="Tonight's special is made from Idaho potatoes. This is where you can add a crappy description for the special. Nathan Shore is not good at smash."
+                android:text="Tonight's special is french toast with homemade syrup. It is topped with blueberries and bananas, with a hint of powdered sugar. Comes with a large drink and a bag of chips - $6.99"
                 android:textAlignment="textStart"
                 android:textColor="#000000"
                 android:textSize="15sp"
