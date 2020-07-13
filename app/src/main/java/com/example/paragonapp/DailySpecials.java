@@ -22,11 +22,16 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+
+import java.io.File;
+import java.io.IOException;
+
 
 public class DailySpecials extends AppCompatActivity {
     //BUTTONS
@@ -169,17 +174,37 @@ private static final int PICK_IMAGE_REQUEST  = 1;
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(cR.getType(uri));
     }
-
+    // This is the better one that we use
     private void Fileuploader() {
         if(weeklyImageUrl != null) {
-            StorageReference Ref = weeklyStorageRef.child("weekly" + "." + getExtension(weeklyImageUrl));
+            final StorageReference Ref = weeklyStorageRef.child("weekly" + "." + getExtension(weeklyImageUrl));
             mUploadTask = Ref.putFile(weeklyImageUrl)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            // Get a URL to the uploaded content
-                            // Uri downloadUrl = taskSnapshot.getDownloadUrl();
                             Toast.makeText(DailySpecials.this, "Upload Complete", Toast.LENGTH_LONG).show();
+
+                            File localFile = null;
+                            try {
+                                localFile = File.createTempFile("images", "jpg");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            Ref.getFile(localFile)
+                                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                            // Successfully downloaded data to local file
+                                            // ...
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception exception) {
+                                    // Handle failed download
+                                    // ...
+                                }
+                            });
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -219,7 +244,7 @@ private static final int PICK_IMAGE_REQUEST  = 1;
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
-    // Sends the File(image) that was chosen to send to fireBase
+    // We dont use this one anymore we made a better one
     private void uploadFile()
     {
         if(weeklyImageUrl != null){
