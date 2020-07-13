@@ -169,7 +169,7 @@ private static final int PICK_IMAGE_REQUEST  = 1;
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(cR.getType(uri));
     }
-
+    // This is the better one that we use
     private void Fileuploader() {
         if(weeklyImageUrl != null) {
             StorageReference Ref = weeklyStorageRef.child(System.currentTimeMillis() + "." + getExtension(weeklyImageUrl));
@@ -177,8 +177,6 @@ private static final int PICK_IMAGE_REQUEST  = 1;
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            // Get a URL to the uploaded content
-                            // Uri downloadUrl = taskSnapshot.getDownloadUrl();
                             Toast.makeText(DailySpecials.this, "Upload Complete", Toast.LENGTH_LONG).show();
                         }
                     })
@@ -218,7 +216,7 @@ private static final int PICK_IMAGE_REQUEST  = 1;
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
-    // Sends the File(image) that was chosen to send to fireBase
+    // We dont use this one anymore we made a better one
     private void uploadFile()
     {
         if(weeklyImageUrl != null){
