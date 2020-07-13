@@ -30,6 +30,7 @@ import com.google.firebase.storage.UploadTask;
 
 
 
+
 public class DailySpecials extends AppCompatActivity {
     //BUTTONS
 Button dailyButton;
@@ -77,6 +78,8 @@ private static final int PICK_IMAGE_REQUEST  = 1;
         // Buttons for Editing Daily/Weekly Specials
         editDailySpecial = (Button)findViewById(R.id.editDailySpecial);
         editWeeklySpecial = (Button)findViewById(R.id.editWeeklySpecial);
+
+        
 
         uploadButton = (Button) findViewById(R.id.uploadButton);
         if(isAdmin == true){
@@ -172,7 +175,7 @@ private static final int PICK_IMAGE_REQUEST  = 1;
     // This is the better one that we use
     private void Fileuploader() {
         if(weeklyImageUrl != null) {
-            StorageReference Ref = weeklyStorageRef.child(System.currentTimeMillis() + "." + getExtension(weeklyImageUrl));
+            StorageReference Ref = weeklyStorageRef.child("weekly" + "." + getExtension(weeklyImageUrl));
             mUploadTask = Ref.putFile(weeklyImageUrl)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -187,7 +190,8 @@ private static final int PICK_IMAGE_REQUEST  = 1;
                             // ...
                         }
                     });
-        }else{
+        }
+        else{
                 Toast.makeText(this, "No File Selected", Toast.LENGTH_SHORT).show();
         }
     }
