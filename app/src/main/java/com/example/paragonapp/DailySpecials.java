@@ -103,6 +103,8 @@ private static final int PICK_IMAGE_REQUEST  = 1;
         dailyImage = (ImageView) findViewById(R.id.dailyPic);
         paragonweekly = (PhotoView) findViewById(R.id.weeklyPic);
 
+        //photoStorage = addListenerForSingleValueEvent(New Value)
+
         // Sets the Daily Special Photo visible and Weekly to Gone to show the Daily Special (Current)
         dailyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -184,6 +186,7 @@ private static final int PICK_IMAGE_REQUEST  = 1;
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Toast.makeText(DailySpecials.this, "Upload Complete", Toast.LENGTH_LONG).show();
 
+                            //Download a file
                             File localFile = null;
                             try {
                                 localFile = File.createTempFile("images", "jpg");
@@ -195,7 +198,6 @@ private static final int PICK_IMAGE_REQUEST  = 1;
                                         @Override
                                         public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                                             // Successfully downloaded data to local file
-                                            // ...
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                 @Override
