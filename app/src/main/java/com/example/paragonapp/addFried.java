@@ -44,7 +44,6 @@ public class addFried extends AppCompatActivity {
                     System.out.println(count.toString() + " "+data.getKey()+ " ==============================================================================================================");
                 }
                 count++;
-
             }
 
             @Override

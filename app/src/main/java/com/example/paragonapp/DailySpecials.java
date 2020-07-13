@@ -28,9 +28,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
-
-
-
 public class DailySpecials extends AppCompatActivity {
     //BUTTONS
 Button dailyButton;
