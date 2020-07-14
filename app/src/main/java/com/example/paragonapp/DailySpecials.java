@@ -17,7 +17,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -92,10 +91,10 @@ private static final int PICK_IMAGE_REQUEST  = 1;
         weeklyImage = (ImageView) findViewById(R.id.weeklyPic);
         dailyImage = (ImageView) findViewById(R.id.dailyPic);
         
-
-        Glide.with(DailySpecials.this)
+        //Not included in the final version since there is no way for our sponsor to update this yet
+        /*Glide.with(DailySpecials.this)
                 .load("https://lh5.googleusercontent.com/K7h8DlaT_wqzGcTFucNludBe0KkilIvc92hrKv4ptFLIt8RpBslwMY8Lj6n2u3xzA3gBo_9DYACX74rOJvmoV7WS1-lbnZgcquFdJvZW3zD3HAbY_KCA24mOzGRoqu7cYCADuoY5")
-                .into(weeklyImage);
+                .into(weeklyImage);*/
 
         logoImage = findViewById(R.id.logo);
 
