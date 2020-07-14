@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:text="Add Grilled Item"
-        android:textColor="#C4C8DC"
+        android:textColor="#FFFFFF"
         android:textSize="45dp"
         android:textStyle="bold|italic" />
 

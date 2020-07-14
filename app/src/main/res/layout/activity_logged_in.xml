@@ -47,17 +47,7 @@
 
             android:src="@drawable/specialphoto" />
 
-        <Button
-            android:id="@+id/managerbtn"
-            android:layout_width="216dp"
-            android:layout_height="75dp"
-            android:layout_gravity="center"
 
-            android:backgroundTint="#830C0C"
-            android:text="Manager Options"
-            android:textSize="18dp"
-            android:visibility="gone"
-            />
 
 
         ></LinearLayout>
@@ -75,6 +65,20 @@
         android:layout_marginBottom="18dp"
         android:visibility="visible"
         app:srcCompat="@drawable/whitetransparagon" />
+    <Button
+        android:id="@+id/managerbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="8dp"
+        android:backgroundTint="#830C0C"
+        android:fontFamily="serif"
+        android:text="Manager Options"
+        android:textColor="#FFFFFF"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:visibility="gone" />
 
 
 </RelativeLayout>
