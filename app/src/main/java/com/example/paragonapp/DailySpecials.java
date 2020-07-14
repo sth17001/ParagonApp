@@ -45,6 +45,7 @@ Boolean isAdmin;
 
     //PHOTOVIEW is similar to image but is able to zoom
 ImageView dailyImage, logoImage, weeklyImage;
+String generatedFilePath;
 LinearLayout dailyLayout;
 PhotoView paragonweekly;
 private ImageView mImageView;
@@ -70,12 +71,31 @@ private static final int PICK_IMAGE_REQUEST  = 1;
         weeklyStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         weeklyDataBaseRef = FirebaseDatabase.getInstance().getReference("uploads");
 
+        weeklyStorageRef.child("weekly.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                // Got the download URL for 'users/me/profile.png'
+                final Uri url = uri;
+                generatedFilePath = url.getPath();
+                System.out.println(generatedFilePath + "=================================================================");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
+
+
+
+
         weeklyImage = (ImageView) findViewById(R.id.weeklyPic);
+        dailyImage = (ImageView) findViewById(R.id.dailyPic);
+        
 
         Glide.with(DailySpecials.this)
                 .load("https://lh5.googleusercontent.com/K7h8DlaT_wqzGcTFucNludBe0KkilIvc92hrKv4ptFLIt8RpBslwMY8Lj6n2u3xzA3gBo_9DYACX74rOJvmoV7WS1-lbnZgcquFdJvZW3zD3HAbY_KCA24mOzGRoqu7cYCADuoY5")
                 .into(weeklyImage);
-
 
         logoImage = findViewById(R.id.logo);
 
